@@ -7,7 +7,13 @@ nav a{    font-size: 2rem;}
 #profile-pic{
     max-height: 3.5rem;
     margin-right: 2.5rem;
+    border: 1px solid white;
+    margin-top: -0.5rem;
 }
 .right-div{
     border: transparent;
+}
+#chat-menu-icon{
+    font-size: 2.5rem;
+    color: white;
 }

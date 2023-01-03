@@ -11,7 +11,8 @@ export class UserService {
     { id: 0, name: 'Pixie', species: 'cat', 
     email:'pixie@gmail.com', country: 'Thailand', city: 'Chiang Mai', 
     isLoggedIn: false, password: 'Ih8U',
-    profilePic: '../assets/images/pixie.jpg'},
+    profilePic: '../assets/images/pixie.jpg',
+    friends: [1,5]},
 
     { id: 1, name: 'Mr. Hopkins', species: 'frog', 
     email:'hop@gmail.com', country: 'Brazil', city: 'Sao Paolo', 
