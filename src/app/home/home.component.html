@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="form-group">
+        <div class="form-row">
+        <input type="text"    (change)="addPostContent($event)" class="form-control text-center" placeholder="What's on your mind?">
+        </div>
+        <div class="form-row mt-3"><div class="col text-center">
+        <button type="submit" (click)="add('')"                 class="btn" >Post</button>
+        </div></div>
+    </div>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr><th colspan="3">Post history</th></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of arr; let i=index" class="border">
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    <img src="{{animals.getUserInfo(post.userId).profilePic}}">
+                </td>
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    {{animals.getUserInfo(post.userId).name}}
+                </td>
+                <td class="col-8" *ngIf="arr && arr.length" [routerLink]="['/user', post.userId ]">
+                    {{post.content}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

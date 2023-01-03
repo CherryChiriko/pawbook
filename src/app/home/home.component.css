@@ -1,0 +1,15 @@
+.btn{
+    background-color: cadetblue;
+    color: white;
+}
+.form-group{
+    border: 1px cadetblue solid;
+    padding: 2rem;
+}
+input, button{
+    font-size: 1.2rem;}
+thead{
+    font-size: .95rem;
+    background-color: cadetblue;
+    color: white;
+}
