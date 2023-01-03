@@ -20,5 +20,5 @@ export class HomeComponent {
   addPostContent(event: any){
     this.postContent = event.target.value;
   }
-  add(body: string){ this.post.addPost(body)}
+  add(){ this.post.addPost(this.postContent)}
 }

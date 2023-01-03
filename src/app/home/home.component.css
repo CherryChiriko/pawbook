@@ -13,3 +13,6 @@ thead{
     background-color: cadetblue;
     color: white;
 }
+tr{
+    border: solid cadetblue 1px;
+}

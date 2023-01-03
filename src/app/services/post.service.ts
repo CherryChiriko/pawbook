@@ -8,14 +8,14 @@ export class PostService {
 
   constructor() { }
 
-  users : IPost[] = [
+  posts : IPost[] = [
     { userId: 0, content: 'Another day in this prison...'},
     { userId: 1, content: 'Hop hop! :D'}
   ];
 
-  getAllPosts(){return this.users; }
+  getAllPosts(){return this.posts; }
   addPost(body: string){
     let newPost = {userId: 0, content: body}
-    this.users.push( newPost);
+    this.posts.unshift( newPost);
   }
 }
