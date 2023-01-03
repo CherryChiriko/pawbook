@@ -11,12 +11,12 @@ export class UserService {
     { id: 0, name: 'Pixie', species: 'cat', 
     email:'pixie@gmail.com', country: 'Thailand', city: 'Chiang Mai', 
     isLoggedIn: false, password: 'Ih8U',
-    profilePic: 'src\\assets\\images\\pixie.jpg'},
+    profilePic: '../assets/images/pixie.jpg'},
 
     { id: 1, name: 'Mr. Hopkins', species: 'frog', 
     email:'hop@gmail.com', country: 'Brazil', city: 'Sao Paolo', 
     isLoggedIn: false, password: 'ComeBackSoon39',
-    profilePic: 'src\\assets\\images\\hopkins.jpg'},
+    profilePic: '../assets/images/hopkins.jpg'},
 
     { id: 2, name: 'Freddy', species: 'penguin', 
     email:'pen@gmail.com', country: 'Argentina', city: 'Rio Grande', 

@@ -1,0 +1,13 @@
+nav{
+    background-color: cadetblue;
+    font-weight: bold;
+}
+nav a{    font-size: 2rem;}
+
+#profile-pic{
+    max-height: 3.5rem;
+    margin-right: 2.5rem;
+}
+.right-div{
+    border: transparent;
+}
