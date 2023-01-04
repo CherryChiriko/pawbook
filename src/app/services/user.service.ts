@@ -17,27 +17,32 @@ export class UserService {
     { id: 1, name: 'Mr. Hopkins', species: 'frog', 
     email:'hop@gmail.com', country: 'Brazil', city: 'Sao Paolo', 
     isLoggedIn: false, password: 'ComeBackSoon39',
-    profilePic: '../assets/images/hopkins.jpg'},
+    profilePic: '../assets/images/hopkins.jpg',
+    friends: [1,5]},
 
     { id: 2, name: 'Freddy', species: 'penguin', 
     email:'pen@gmail.com', country: 'Argentina', city: 'Rio Grande', 
     isLoggedIn: false, password: 'IceCreamSanta123',
-    profilePic: '../assets/images/freddy.jpg'},
+    profilePic: '../assets/images/freddy.jpg',
+    friends: [1,5]},
 
     { id: 3, name: 'Juan', species: 'monkey', 
     email:'jungle@gmail.com', country: 'Costa Rica', city: 'Manuel Antonio', 
     isLoggedIn: false, password: 'Banana',
-    profilePic: '../assets/images/juan.jpg'},
+    profilePic: '../assets/images/juan.jpg',
+    friends: [1,5]},
 
     { id: 4, name: 'Federico', species: 'dog', 
     email:'FEDuX22@gmail.com', country: 'Italy', city: 'Urbino', 
     isLoggedIn: false, password: 'MorsTuaVitaMea',
-    profilePic: '../assets/images/federico.jpg'},
+    profilePic: '../assets/images/federico.jpg',
+    friends: [1,5]},
 
     { id: 5, name: 'Harvey', species: 'rabbit', 
     email:'harvey_edna@gmail.com', country: 'Germany', city: 'Berlin', 
     isLoggedIn: false, password: 'Edna',
-    profilePic: '../assets/images/harvey.jpg'},
+    profilePic: '../assets/images/harvey.jpg',
+    friends: [0,1,2,3,4]},
   ];
 
   pswCheck(psw : string): (number|null) {
@@ -51,10 +56,21 @@ export class UserService {
     return this.users[id];
   }
   getAllUsers(){return this.users}
+  getUserFromId(id:number){
+    return this.users.filter(user => user.id === id)
+  }
   filterSearch(body: string){
+    
+    let friendsIds: number[] = this.getUserInfo(0).friends;
+    if (!friendsIds?.length) {return []}
+
+    let friends = this.users.filter(user => user.id in friendsIds)
+    if (!body){return friends}
+    
     let content = new RegExp(body, 'gi')
-    let result = this.users.filter(user => user.name.match(content));
-    return result.length? result : null;
+    let result = friends.filter(friend => friend.name.match(content));
+
+    return result.length? result : [];
   }
 
 }

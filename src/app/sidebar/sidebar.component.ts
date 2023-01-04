@@ -10,22 +10,24 @@ import { UserService } from '../services/user.service';
 export class SidebarComponent implements OnInit {
   constructor( private users: UserService, private chat: ChatService){}
 
-  isOpen !: boolean;
-  friendsIds ?: number[] = this.users.getUserInfo(0).friends;
+  isOpen : boolean = false;
   searchBody: string = '';
+  friendsIds ?: number[];
 
   ngOnInit(): void {
     this.isOpen = this.chat.isOpen;
+    this.friendsIds = this.users.getUserInfo(0).friends;
   }
 
   loginCheck(){return this.users.loginCheck(0);}
   toggleChat(){this.isOpen = this.chat.toggleChatList();}
+  
   getFriendInfo(id: number){return this.users.getUserInfo(id)}
 
   search(){
-    this.users.filterSearch(this.searchBody)}
-  searchContent(event: any){
-    this.searchBody = event.target.value;
-    console.log("I'm searchContent " + this.searchBody)
+    let result = this.users.filterSearch(this.searchBody);
+    if (result) {this.friendsIds = [... result.map(res => res.id)]}
+    else{this.friendsIds = this.users.getUserInfo(0).friends}
   }
+  searchContent(event: any){    this.searchBody = event.target.value;  }
 }
