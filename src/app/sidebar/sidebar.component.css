@@ -1,5 +1,5 @@
 #sidebar-div{
-    width:20%;
+    width:30%;
     background-color: cadetblue;
     position: absolute;
     right: 2px;
@@ -7,9 +7,15 @@
     color: white;
     border: solid white 1px;
 }
+#search-addon{
+    background-color: white;
+    color: cadetblue;
+}
+#search-bar, #search-addon{margin-bottom: 1rem;}
 img {
     max-height: 4rem;
     margin: 0.75rem;
+    border: 1px solid white;
 }
 h4{
     margin-bottom: 1rem;

@@ -12,6 +12,7 @@ export class SidebarComponent implements OnInit {
 
   isOpen !: boolean;
   friendsIds ?: number[] = this.users.getUserInfo(0).friends;
+  searchBody: string = '';
 
   ngOnInit(): void {
     this.isOpen = this.chat.isOpen;
@@ -20,4 +21,11 @@ export class SidebarComponent implements OnInit {
   loginCheck(){return this.users.loginCheck(0);}
   toggleChat(){this.isOpen = this.chat.toggleChatList();}
   getFriendInfo(id: number){return this.users.getUserInfo(id)}
+
+  search(){
+    this.users.filterSearch(this.searchBody)}
+  searchContent(event: any){
+    this.searchBody = event.target.value;
+    console.log("I'm searchContent " + this.searchBody)
+  }
 }

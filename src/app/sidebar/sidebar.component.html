@@ -1,11 +1,29 @@
 <div id="sidebar-div" class="d-flex flex-column flex-shrink-0 p-3">
-<!-- <nav class="navbar navbar-expand-md fixed-right sidebar-nav"> -->
-    <h4>Friends List:</h4>
-    <ul *ngFor="let friendId of friendsIds" class="nav nav-pills flex-column mb-auto">
+    <h4>Friends List</h4>
+    <div class="input-group rounded">
+        <input type="search" class="form-control rounded" placeholder="Search" id="search-bar"
+        (change)="searchContent($event)"/>
+        <button class="input-group-text border-0" id="search-addon"
+        (click)="search()">
+            <span class="material-symbols-outlined">search</span>
+        </button>
+    </div>
+    <table class="table">
+        <tr  *ngFor="let friendId of friendsIds" class="nav nav-pills flex-column mb-auto">
+            <td><img src="{{getFriendInfo(friendId).profilePic}}"></td>
+            <td>{{getFriendInfo(friendId).name}}</td>
+            <td><span>
+                <i class="material-symbols-outlined">chat</i> 
+                <i class="material-symbols-outlined">account_circle</i>
+            </span></td>
+        </tr>
+    </table>
+    <!-- <ul *ngFor="let friendId of friendsIds" class="nav nav-pills flex-column mb-auto">
         <li class="nav-item"><span>
         <img src="{{getFriendInfo(friendId).profilePic}}">
-        {{getFriendInfo(friendId).name}}</span>
+        {{getFriendInfo(friendId).name}}</span>        
+        <i class="material-symbols-outlined">chat</i> 
+        <i class="material-symbols-outlined">account_circle</i>
         </li>
-    </ul>
-<!-- </nav> -->
+    </ul> -->
 </div>

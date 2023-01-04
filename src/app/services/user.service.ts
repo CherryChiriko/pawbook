@@ -28,7 +28,7 @@ export class UserService {
     isLoggedIn: false, password: 'Banana'},
 
     { id: 4, name: 'Federico', species: 'dog', 
-    email:'veni1vidi2vici3@gmail.com', country: 'Italy', city: 'Urbino', 
+    email:'FEDuX22@gmail.com', country: 'Italy', city: 'Urbino', 
     isLoggedIn: false, password: 'MorsTuaVitaMea'},
 
     { id: 5, name: 'Harvey', species: 'rabbit', 
@@ -48,5 +48,10 @@ export class UserService {
     return this.users[id];
   }
   getAllUsers(){return this.users}
+  filterSearch(body: string){
+    let content = new RegExp(body, 'gi')
+    let result = this.users.filter(user => user.name.match(content));
+    return result.length? result : null;
+  }
 
 }
