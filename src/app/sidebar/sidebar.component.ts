@@ -3,11 +3,11 @@ import { ChatService } from '../services/chat.service';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class SidebarComponent implements OnInit {
   constructor( private users: UserService, private chat: ChatService){}
 
   isOpen !: boolean;
@@ -19,4 +19,5 @@ export class HeaderComponent implements OnInit {
 
   loginCheck(){return this.users.loginCheck(0);}
   toggleChat(){this.isOpen = this.chat.toggleChatList();}
+  getFriendInfo(id: number){return this.users.getUserInfo(id)}
 }

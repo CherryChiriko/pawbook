@@ -27,17 +27,4 @@
       </div>
     </div>
   </nav>
-  <div class="container">
-    
-  <nav class="navbar navbar-expand-md fixed-right sidebar-nav"
-    *ngIf="isOpen">
-    Friends List:
-        <ul *ngFor="let friendId of friendsIds; let i=index">
-            <li>{{friendId}}</li>
-        </ul>
-            
-    
-    
-
-  </nav>
-  </div>
+  <app-sidebar *ngIf="isOpen"></app-sidebar>

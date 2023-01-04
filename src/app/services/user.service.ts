@@ -33,7 +33,8 @@ export class UserService {
 
     { id: 5, name: 'Harvey', species: 'rabbit', 
     email:'harvey_edna@gmail.com', country: 'Germany', city: 'Berlin', 
-    isLoggedIn: false, password: 'Edna'},
+    isLoggedIn: false, password: 'Edna',
+    profilePic: '../assets/images/harvey.jpg'},
   ];
 
   pswCheck(psw : string): (number|null) {
