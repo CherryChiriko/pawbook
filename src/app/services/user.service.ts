@@ -21,15 +21,18 @@ export class UserService {
 
     { id: 2, name: 'Freddy', species: 'penguin', 
     email:'pen@gmail.com', country: 'Argentina', city: 'Rio Grande', 
-    isLoggedIn: false, password: 'IceCreamSanta123'},
+    isLoggedIn: false, password: 'IceCreamSanta123',
+    profilePic: '../assets/images/freddy.jpg'},
 
     { id: 3, name: 'Juan', species: 'monkey', 
     email:'jungle@gmail.com', country: 'Costa Rica', city: 'Manuel Antonio', 
-    isLoggedIn: false, password: 'Banana'},
+    isLoggedIn: false, password: 'Banana',
+    profilePic: '../assets/images/juan.jpg'},
 
     { id: 4, name: 'Federico', species: 'dog', 
     email:'FEDuX22@gmail.com', country: 'Italy', city: 'Urbino', 
-    isLoggedIn: false, password: 'MorsTuaVitaMea'},
+    isLoggedIn: false, password: 'MorsTuaVitaMea',
+    profilePic: '../assets/images/federico.jpg'},
 
     { id: 5, name: 'Harvey', species: 'rabbit', 
     email:'harvey_edna@gmail.com', country: 'Germany', city: 'Berlin', 

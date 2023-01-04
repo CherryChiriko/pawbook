@@ -8,22 +8,29 @@
             <span class="material-symbols-outlined">search</span>
         </button>
     </div>
-    <table class="table">
-        <tr  *ngFor="let friendId of friendsIds" class="nav nav-pills flex-column mb-auto">
-            <td><img src="{{getFriendInfo(friendId).profilePic}}"></td>
+    <table class="table text-center" *ngFor="let friendId of friendsIds">
+        <tr rowspan="2" class="mb-auto flex-row">
+            <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
             <td>{{getFriendInfo(friendId).name}}</td>
-            <td><span>
-                <i class="material-symbols-outlined">chat</i> 
-                <i class="material-symbols-outlined">account_circle</i>
-            </span></td>
-        </tr>
+        <tr>     <td><span>
+            <i class="material-symbols-outlined">chat</i> 
+            <i class="material-symbols-outlined">account_circle</i>
+        </span></td>
+       </tr>
     </table>
-    <!-- <ul *ngFor="let friendId of friendsIds" class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item"><span>
-        <img src="{{getFriendInfo(friendId).profilePic}}">
-        {{getFriendInfo(friendId).name}}</span>        
-        <i class="material-symbols-outlined">chat</i> 
-        <i class="material-symbols-outlined">account_circle</i>
-        </li>
-    </ul> -->
 </div>
+
+
+
+
+<!-- <table class="table text-center" *ngFor="let friendId of friendsIds">
+    <tr rowspan="2" class="nav nav-pills flex-row mb-auto">
+        <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
+        <td>{{getFriendInfo(friendId).name}}</td>
+    <tr>     <td>{{getFriendInfo(friendId).name}}</td>
+   </tr><tr><td><span>
+            <i class="material-symbols-outlined">chat</i> 
+            <i class="material-symbols-outlined">account_circle</i>
+        </span></td>
+    </tr>
+</table> -->

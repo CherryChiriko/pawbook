@@ -8,7 +8,7 @@ export interface IUser {
     isLoggedIn: boolean,
     password : string,
     friends ?: number[],
-    profilePic?: string
+    profilePic: string
 }
 
 export interface ILogin {
