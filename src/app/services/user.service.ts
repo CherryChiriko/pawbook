@@ -59,18 +59,31 @@ export class UserService {
   getUserFromId(id:number){
     return this.users.filter(user => user.id === id)
   }
-  filterSearch(body: string){
-    
-    let friendsIds: number[] = this.getUserInfo(0).friends;
-    if (!friendsIds?.length) {return []}
 
-    let friends = this.users.filter(user => user.id in friendsIds)
-    if (!body){return friends}
+
+  filterSearch(body: string){
+    let friendsIds: number[] = this.getUserInfo(0).friends;
+    let friends = this.users.filter(user => friendsIds.includes(user.id));
     
     let content = new RegExp(body, 'gi')
     let result = friends.filter(friend => friend.name.match(content));
+    return result;
+    
 
-    return result.length? result : [];
+    // let friendsIds: number[] = this.getUserInfo(0).friends;
+    // if (!friendsIds?.length) {return []}
+
+    // let friends = this.users.filter(user => user.id in friendsIds)
+    // if (!body){return friends}
+    
+    // let content = new RegExp(body, 'gi')
+    // let result = friends.filter(friend => friend.name.match(content));
+
+    // return result.length? result : [];
+
+    // let result = this.users.filterSearch(this.searchBody);
+  //   if (result) {this.friendsIds = [... result.map(res => res.id)]}
+  //   else{this.friendsIds = this.users.getUserInfo(0).friends}
   }
 
 }

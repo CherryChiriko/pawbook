@@ -13,8 +13,8 @@
             <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
             <td>{{getFriendInfo(friendId).name}}</td>
         <tr><td><span>
-            <i class="material-symbols-outlined">chat</i> 
-            <i class="material-symbols-outlined">account_circle</i>
+            <a><i class="material-symbols-outlined">chat</i></a> 
+            <a routerLink="user/{{friendId}}"><i class="material-symbols-outlined">account_circle</i></a>
         </span></td>
        </tr>
     </table>

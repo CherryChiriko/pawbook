@@ -19,15 +19,14 @@ export class SidebarComponent implements OnInit {
     this.friendsIds = this.users.getUserInfo(0).friends;
   }
 
-  loginCheck(){return this.users.loginCheck(0);}
-  toggleChat(){this.isOpen = this.chat.toggleChatList();}
+  loginCheck(){ return this.users.loginCheck(0);}
+  toggleChat(){ this.isOpen = this.chat.toggleChatList();}
   
-  getFriendInfo(id: number){return this.users.getUserInfo(id)}
+  getFriendInfo(id: number){  return this.users.getUserInfo(id)}
 
   search(){
     let result = this.users.filterSearch(this.searchBody);
-    if (result) {this.friendsIds = [... result.map(res => res.id)]}
-    else{this.friendsIds = this.users.getUserInfo(0).friends}
+    this.friendsIds = [... result.map(res => res.id)];
   }
   searchContent(event: any){    this.searchBody = event.target.value;  }
 }
