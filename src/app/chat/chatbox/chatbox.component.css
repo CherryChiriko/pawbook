@@ -1,0 +1,29 @@
+.container{
+    max-width: 300px;
+    height: 400px;
+    overflow-y: auto;
+    position: absolute;
+    right: .75rem;
+    bottom: .75rem;
+    background-color: red;
+    
+    background-color: #9fc4c6;
+    border: 1px solid #395e60;
+}
+img{
+    height: 4rem;
+}
+tbody{
+    background-color: white;
+}
+.btn{
+    border: 1px solid #395e60;
+    color: #395e60;
+    background-color: #9fc4c6;
+}
+
+.input-group{
+    position: absolute;
+    bottom: .75rem;
+    width: 92%;
+}

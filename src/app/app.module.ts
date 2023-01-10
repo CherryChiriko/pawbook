@@ -11,7 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ChatbarComponent } from './chatbar/chatbar.component';
+import { ChatbarComponent } from './chat/chatbar/chatbar.component';
+import { ChatboxComponent } from './chat/chatbox/chatbox.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ChatbarComponent } from './chatbar/chatbar.component';
     HomeComponent,
     UserComponent,
     SidebarComponent,
-    ChatbarComponent
+    ChatbarComponent,
+    ChatboxComponent
   ],
   imports: [
     BrowserModule,

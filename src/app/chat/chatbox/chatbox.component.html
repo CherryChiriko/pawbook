@@ -1,0 +1,34 @@
+
+<div class="container rounded">
+    <table class="table text-center">
+        <thead>
+            <tr>{{friend.name}}</tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of arr">
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    <img src="{{friend.profilePic}}">
+                </td>
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    {{post.content}}
+                </td>
+            </tr>
+            <!-- <tr *ngFor="let post of arr; let i=index" class="border">
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    <img src="{{animals.getUserInfo(post.userId).profilePic}}">
+                </td>
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    {{animals.getUserInfo(post.userId).name}}
+            </tr> -->
+        </tbody>
+    </table>
+    <div class="input-group mb-3">
+        <input type="text" (change)="addMsgContent($event)" 
+        class="form-control">
+        <div class="input-group-append">
+          <button class="btn" type="button" (click)="add()">
+            <i class="material-symbols-outlined">send</i>
+        </button>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
+import { ChatboxComponent } from './chat/chatbox/chatbox.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
@@ -8,7 +8,7 @@ import { UserComponent } from './user/user.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'user/:id', component: UserComponent},
-  { path: 'chat/:id', component: ChatComponent},
+  // { path: 'chat/:id', component: ChatboxComponent},
   // { path: '**', redirectTo: 'login'},
   { path: 'login', component: LoginComponent}
 ];

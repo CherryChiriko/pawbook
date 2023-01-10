@@ -23,8 +23,8 @@ export class ChatService {
     { userId: 1, content: 'Hop hop! :D'}
   ];
 
-  getAllPosts(){return this.posts; }
-  addPost(body: string){
+  getAllMsgs(){return this.posts; }
+  addMsg(body: string){
     let newPost = {userId: 0, content: body}
     this.posts.unshift( newPost);
   }
