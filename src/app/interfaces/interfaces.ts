@@ -20,3 +20,9 @@ export interface IPost {
     userId: number,
     content : string
 }
+
+export interface IChat {
+    senderId: number,
+    receiverId: number,
+    content : string[]
+}

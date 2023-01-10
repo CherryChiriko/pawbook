@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../services/chat.service';
+import { SidebarService } from '../services/sidebar.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -8,19 +8,19 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  constructor( private users: UserService, private chat: ChatService){}
+  constructor( private users: UserService, private bar: SidebarService){}
 
   isOpen : boolean = false;
   searchBody: string = '';
   friendsIds ?: number[];
 
   ngOnInit(): void {
-    this.isOpen = this.chat.isOpen;
+    this.isOpen = this.bar.isOpen;
     this.friendsIds = this.users.getUserInfo(0).friends;
   }
 
   loginCheck(){ return this.users.loginCheck(0);}
-  toggleChat(){ this.isOpen = this.chat.toggleChatList();}
+  toggleBar(){ this.isOpen = this.bar.toggleSidebar();}
   
   getFriendInfo(id: number){  return this.users.getUserInfo(id)}
 

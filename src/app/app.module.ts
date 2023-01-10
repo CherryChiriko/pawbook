@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChatbarComponent } from './chatbar/chatbar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     HomeComponent,
     UserComponent,
-    SidebarComponent
+    SidebarComponent,
+    ChatbarComponent
   ],
   imports: [
     BrowserModule,

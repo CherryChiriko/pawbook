@@ -9,6 +9,7 @@
     margin-top: -1.3rem;
     color: white;
     border: solid white 1px;
+    z-index: 2;
 }
 #search-addon{
     background-color: white;

@@ -1,1 +1,26 @@
-<p>chat works!</p>
+
+<div class="container rounded">
+    <p>chat box</p>
+    <table class="table text-center">
+        <thead>
+            <tr><img src="{{profile.profilePic}}"></tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of arr; let i=index" class="border">
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    <img src="{{animals.getUserInfo(post.userId).profilePic}}">
+                </td>
+                <td class="col-2" *ngIf="arr && arr.length" >
+                    {{animals.getUserInfo(post.userId).name}}
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="form-row">
+        <input type="text"    (change)="addPostContent($event)" class="form-control text-center">
+        </div>
+        <div class="form-row mt-3"><div class="col text-center">
+        <button type="submit" (click)="add()"                 class="btn" >Post</button>
+        </div></div>
+    </div>
+</div>
