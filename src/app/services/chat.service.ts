@@ -23,9 +23,33 @@ export class ChatService {
     { userId: 1, content: 'Hop hop! :D'}
   ];
 
-  getAllMsgs(){return this.posts; }
-  addMsg(body: string){
-    let newPost = {userId: 0, content: body}
-    this.posts.unshift( newPost);
+  getAllMsgs(friendId : number){
+    console.log(this.getChatWithFriend(friendId));
+    return this.getChatWithFriend(friendId); }
+
+  getChatWithFriend(friendId : number){
+    return this.chats.filter(chat => {
+      let ids = [chat.senderId, chat.receiverId];
+      // return (friendId.indexOf(ids)> -1)
+      }
+      )
+  }
+
+  // updateChat(body: string, friendId: number){
+
+  // }
+
+  // updateMsg(){
+
+  // }
+  addMsg(body: string, friendId: number){
+    let chatsWithFriend = this.getChatWithFriend(friendId);
+    console.log(chatsWithFriend[chatsWithFriend.length-1].content)
+    if (chatsWithFriend[chatsWithFriend.length-1].senderId === 0){
+      this.chats[this.chats.length-1].content.push(body);
+    }
+    // else{
+    //   this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
+    // }
   }
 }

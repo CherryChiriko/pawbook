@@ -5,12 +5,12 @@
             <tr>{{friend.name}}</tr>
         </thead>
         <tbody>
-            <tr *ngFor="let post of arr">
-                <td class="col-2" *ngIf="arr && arr.length" >
+            <tr *ngFor="let chat of arr">
+                <td class="col-1 pic" *ngIf="arr && arr.length" >
                     <img src="{{friend.profilePic}}">
                 </td>
                 <td class="col-2" *ngIf="arr && arr.length" >
-                    {{post.content}}
+                    {{chat.content}}
                 </td>
             </tr>
             <!-- <tr *ngFor="let post of arr; let i=index" class="border">

@@ -8,19 +8,20 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  constructor( private users: UserService, private bar: SidebarService){}
+  constructor( private users: UserService, private sidebar: SidebarService){}
 
   isOpen : boolean = false;
   searchBody: string = '';
   friendsIds ?: number[];
 
   ngOnInit(): void {
-    this.isOpen = this.bar.isOpen;
+    this.isOpen = this.sidebar.isOpen;
     this.friendsIds = this.users.getUserInfo(0).friends;
   }
 
   loginCheck(){ return this.users.loginCheck(0);}
-  toggleBar(){ this.isOpen = this.bar.toggleSidebar();}
+  toggleBar(){ this.isOpen = this.sidebar.toggleSidebar();}
+  // toggleBar(){ this.isOpen = false;}
   
   getFriendInfo(id: number){  return this.users.getUserInfo(id)}
 
