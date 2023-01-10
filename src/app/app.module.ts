@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { SidebarComponent } from './header/sidebar/sidebar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChatbarComponent } from './chat/chatbar/chatbar.component';
 import { ChatboxComponent } from './chat/chatbox/chatbox.component';

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SidebarService } from '../services/sidebar.service';
 import { UserService } from '../services/user.service';
 
@@ -10,13 +10,14 @@ import { UserService } from '../services/user.service';
 export class HeaderComponent implements OnInit {
   constructor( private users: UserService, private sidebar: SidebarService){}
 
-  isOpen !: boolean;
+  isOpen : boolean = this.sidebar.isOpen;
   friendsIds ?: number[] = this.users.getUserInfo(0).friends;
 
-  ngOnInit(): void {
-    this.isOpen = this.sidebar.isOpen;
-  }
+  ngOnInit(): void {  }
 
   loginCheck(){return this.users.loginCheck(0);}
-  toggleChat(){this.isOpen = this.sidebar.toggleSidebar();}
+  toggleSidebar(){
+    console.log("I am header: ", this.isOpen)
+    this.isOpen = this.sidebar.toggleSidebar();
+  }
 }
