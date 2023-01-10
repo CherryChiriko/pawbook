@@ -7,21 +7,33 @@
     bottom: .75rem;
     background-color: red;
     
-    background-color: #9fc4c6;
+    background-color: #cee1e2;
+    
     border: 1px solid #395e60;
 }
 img{
     height: 4rem;
 }
+thead{
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #395e60;
+    border: transparent;
+}
 tbody{
     background-color: white;
+}
+#table-div{
+    height:30%;
+    position: relative;
+    top: 0;
 }
 .btn{
     border: 1px solid #395e60;
     color: #395e60;
     background-color: #9fc4c6;
-}
 
+}
 .input-group{
     position: absolute;
     bottom: .75rem;

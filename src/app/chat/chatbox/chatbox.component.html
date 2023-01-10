@@ -1,27 +1,25 @@
 
 <div class="container rounded">
+    
+    <div id="table-div" class="rounded">
     <table class="table text-center">
         <thead>
-            <tr>{{friend.name}}</tr>
+            <tr><td>   </td></tr>
+            <tr colspan="3">{{friend.name}}</tr>
+            <tr>   <td>   </td>      </tr>
         </thead>
-        <tbody>
-            <tr *ngFor="let chat of arr">
-                <td class="col-1 pic" *ngIf="arr && arr.length" >
-                    <img src="{{friend.profilePic}}">
+        <tbody *ngFor="let chat of arr">
+            <tr *ngFor="let body of chat.content; let i=index">
+                <td class="col-1 pic" >
+                    <img src="{{getPicture(chat.senderId)}}" *ngIf="i === 0">
                 </td>
-                <td class="col-2" *ngIf="arr && arr.length" >
-                    {{chat.content}}
+                <td class="col-2"  >
+                    {{chat.content[i]}}
                 </td>
             </tr>
-            <!-- <tr *ngFor="let post of arr; let i=index" class="border">
-                <td class="col-2" *ngIf="arr && arr.length" >
-                    <img src="{{animals.getUserInfo(post.userId).profilePic}}">
-                </td>
-                <td class="col-2" *ngIf="arr && arr.length" >
-                    {{animals.getUserInfo(post.userId).name}}
-            </tr> -->
         </tbody>
     </table>
+    </div>
     <div class="input-group mb-3">
         <input type="text" (change)="addMsgContent($event)" 
         class="form-control">

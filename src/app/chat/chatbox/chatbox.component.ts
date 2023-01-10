@@ -1,5 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
-import { IUser } from 'src/app/interfaces/interfaces';
+import { IChat, IUser } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,14 +14,17 @@ export class ChatboxComponent {
 
   friend !: IUser;
   msgContent: string = '';
-  arr = this.chat.getAllMsgs(this.friendId);
-  
+  arr !: IChat[];
+
+  constructor(private chat: ChatService, private users: UserService){}
+
   ngOnInit(): void { 
     this.friend = this.users.getUserInfo(this.friendId);
-    console.log(this.arr)
+    this.arr = this.chat.getChatWithFriend(this.friendId);
   }
-  constructor(private chat: ChatService, private users: UserService){}
-  
+  getPicture(id: number){
+    return this.users.getUserInfo(id).profilePic
+  }
   addMsgContent(event: any){
     this.msgContent = event.target.value;
   }

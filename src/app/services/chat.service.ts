@@ -8,12 +8,9 @@ export class ChatService {
 
   constructor() { }
 
-  isOpen : boolean = false;
-  toggleChatList(){this.isOpen = !this.isOpen; return this.isOpen;}
-
   chats : IChat[] = [
-    {senderId: 0, receiverId: 1, content: ["Hey, how are you?"]},
-    {senderId: 1, receiverId: 0, content: ["Not so well...", "I haven't eaten yet"]},
+    {senderId: 1, receiverId: 0, content: ["Hey, how are you?"]},
+    {senderId: 0, receiverId: 1, content: ["Not so well...", "I haven't eaten yet"]},
     {senderId: 5, receiverId: 0, content: ["Hi hi!", "What a nice day"]},
     {senderId: 0, receiverId: 1, content: ["I'm still waiting for lunch"]},
   ]
@@ -25,12 +22,13 @@ export class ChatService {
 
   getAllMsgs(friendId : number){
     console.log(this.getChatWithFriend(friendId));
-    return this.getChatWithFriend(friendId); }
+    return this.getChatWithFriend(friendId); 
+  }
 
   getChatWithFriend(friendId : number){
     return this.chats.filter(chat => {
       let ids = [chat.senderId, chat.receiverId];
-      // return (friendId.indexOf(ids)> -1)
+      return (ids.indexOf(friendId)> -1)
       }
       )
   }
@@ -44,10 +42,22 @@ export class ChatService {
   // }
   addMsg(body: string, friendId: number){
     let chatsWithFriend = this.getChatWithFriend(friendId);
-    console.log(chatsWithFriend[chatsWithFriend.length-1].content)
-    if (chatsWithFriend[chatsWithFriend.length-1].senderId === 0){
-      this.chats[this.chats.length-1].content.push(body);
+    let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
+    let chatMsg = this.chats.find(msg => msg === lastMsg);
+    let chatIndex = this.chats.findIndex(msg => msg === lastMsg)
+    if (chatMsg?.senderId === 0){
+      this.chats[chatIndex].content.push(body);
     }
+    else {
+      this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
+    }
+    // console.log(chatMsg)
+    // console.log(chatsWithFriend[chatsWithFriend.length-1].content)
+    // if (chatsWithFriend[chatsWithFriend.length-1].senderId === 0){
+    //   this.chats[this.chats.length-1].content.push(body);
+    // }
+
+
     // else{
     //   this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
     // }
