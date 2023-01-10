@@ -9,13 +9,13 @@ export class UserService {
   constructor() {}
   users : IUser[] = [
     { id: 0, name: 'Pixie', species: 'cat', 
-    email:'pixie@gmail.com', country: 'Thailand', city: 'Chiang Mai', 
+    email:'pixie@gmail.com', country: 'Thailand', city: 'Chiang Mai (เชียงใหม่)', 
     isLoggedIn: false, password: 'Ih8U',
     profilePic: '../assets/images/pixie.jpg',
     friends: [1,5]},
 
     { id: 1, name: 'Mr. Hopkins', species: 'frog', 
-    email:'hop@gmail.com', country: 'Brazil', city: 'Sao Paolo', 
+    email:'hop@gmail.com', country: 'Brazil', city: 'São Paulo', 
     isLoggedIn: false, password: 'ComeBackSoon39',
     profilePic: '../assets/images/hopkins.jpg',
     friends: [1,5]},
@@ -45,8 +45,8 @@ export class UserService {
     friends: [0,1,2,3,4]},
   ];
 
-  pswCheck(psw : string): (number|null) {
-    let result = this.users.filter(user => psw === user.password);
+  emailCheck(email : string): (number|null) {
+    let result = this.users.filter(user => email === user.email);
     return result.length? result[0].id : null;
   }
   loginCheck(id : number): boolean{
@@ -60,6 +60,13 @@ export class UserService {
     return this.users.filter(user => user.id === id)
   }
 
+  findUser(email: string, password: string){
+    let matchId = this.emailCheck(email);
+    if (matchId === null) return false;
+    return this.getUserInfo(matchId).password === password;
+    // return this.getUserInfo(matchId).password === password ? null : {notFound: true};
+  }
+
 
   filterSearch(body: string){
     let friendsIds: number[] = this.getUserInfo(0).friends;
@@ -68,22 +75,6 @@ export class UserService {
     let content = new RegExp(body, 'gi')
     let result = friends.filter(friend => friend.name.match(content));
     return result;
-    
-
-    // let friendsIds: number[] = this.getUserInfo(0).friends;
-    // if (!friendsIds?.length) {return []}
-
-    // let friends = this.users.filter(user => user.id in friendsIds)
-    // if (!body){return friends}
-    
-    // let content = new RegExp(body, 'gi')
-    // let result = friends.filter(friend => friend.name.match(content));
-
-    // return result.length? result : [];
-
-    // let result = this.users.filterSearch(this.searchBody);
-  //   if (result) {this.friendsIds = [... result.map(res => res.id)]}
-  //   else{this.friendsIds = this.users.getUserInfo(0).friends}
   }
 
 }

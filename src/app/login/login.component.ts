@@ -11,23 +11,21 @@ import { UserService } from '../services/user.service';
 })
 
 export class LoginComponent {
-  successMessage: string = ''
-  rePassword !: string;
+  successMessage: string = '';
 
   constructor(private route: Router, private users: UserService){
-    // console.log(this.findUser('Ih8U'))
   }
 
   reactiveForm !: FormGroup;
+
   ngOnInit() {
     this.reactiveForm = new FormGroup({
       email: new FormControl(null, [Validators.required,
         Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")
       ]),
-      password: new FormControl(null, [Validators.required]),
-      rePassword: new FormControl(null, [Validators.required])
+      password: new FormControl(null, [Validators.required])
     }
-    // ,this.formValidation
+    ,this.formValidation
   )    
   }
 
@@ -35,30 +33,64 @@ export class LoginComponent {
     this.successMessage = "User data registered successfully"
     this.route.navigate(['/home'])
   }
-  findUser(psw: string){
-    return this.users.pswCheck(psw);
+
+  // formValidation(control: AbstractControl){
+  //   // const psw = 'Ih8U'; const eml = 'pixie@gmail.com';
+  //   const pswCtrl = control.get('password');
+  //   const emlCtrl = control.get('email');
+  //   let match = this.users.emailCheck(emlCtrl?.value);
+  //   if (match === null) return {notFound: true};
+  //   return this.users.getUserInfo(match).password === pswCtrl?.value ? null : {notFound: true};
+  // }
+
+
+
+  // getUser(eml: string, psw: string){
+  //   return eml && psw && eml !== psw ?
+  //   {mismatch: true} : null
+  //   // return this.users.findUser(eml, psw);
+  // }
+  // formValidation(control: AbstractControl) {
+  //   const pswCtrl = control.get('password');
+  //   const emlCtrl = control.get('email');
+  //   return this.getUser(emlCtrl?.value, pswCtrl?.value);
+  // }
+
+  // getUser(eml: string, psw: string){
+  //   // return this.users.findUser(eml, psw);
+  // }
+  // formValidation(control: AbstractControl) {
+  //   const pswCtrl = control.get('password');
+  //   const emailCtrl = control.get('email');
+  //   return (pswCtrl && emailCtrl) ? this.getUser(pswCtrl?.value, emailCtrl?.value) : null;
+  // }
+
+
+
+
+
+
+
+
+  // getUser(emailCtrl: AbstractControl, pswCtrl: AbstractControl){
+
+  //   return pswCtrl && emailCtrl && pswCtrl.value !== emailCtrl.value ?
+  //   {mismatch: true} : null
+  //   }
+  // formValidation(control: AbstractControl) {
+  //   const pswCtrl = control.get('password');
+  //   const emailCtrl = control.get('email');
+  //   return (pswCtrl && emailCtrl) ? null: this.getUser(pswCtrl, emailCtrl);
+  //   // return (pswCtrl && emailCtrl) ? this.getUser(pswCtrl?.value, emailCtrl?.value) : null;
+  // }
+  getUser(email: string, password: string){
+    return this.users.findUser(email, password);
   }
   formValidation(control: AbstractControl) {
-    console.log(this.findUser(control.get('password')?.value));
-    // return control.get('password')?.value? {mismatch: true} : null;
+    const pswCtrl = control.get('password');
+    const emailCtrl = control.get('email');
+    return pswCtrl && emailCtrl && this.getUser(pswCtrl.value, emailCtrl.value) ?
+    {mismatch: true} : null
   }
 
-//   formValidation(control: AbstractControl) {
-//   const pswCtrl = control.get('password');
-//   const rePswCtrl = control.get('rePassword');
-//   return pswCtrl && rePswCtrl && pswCtrl.value !== rePswCtrl.value ?
-//   {mismatch: true} : null
-// }
-
-// formValidation(control: AbstractControl){
-//   const pswCtrl = control.get('password');
-//   const emlCtrl = control.get('email');
-//   console.log(this.route)
-
-//   // let match = this.users.pswCheck(pswCtrl?.value);
-//   // console.log(match)
-//   // return !match? null: this.users.pswCheck(emlCtrl?.value === this.users.getUserEmail(match));
-//   return null;
-//   // return pswCtrl.value !== 
-// }
 }

@@ -1,2 +1,54 @@
-<p *ngIf="isLoggedIn">user works!</p>
-<p>I'm still here</p>
+<!-- <p *ngIf="isLoggedIn">I am logged-in</p> -->
+<div class="container">
+<table class="table text-center expand-md">
+<tr class="main">
+    <td><img src="{{profile.profilePic}}"></td>
+    <td><h2 id ="name">{{profile.name}}</h2></td>
+</tr>
+<!-- </table>
+<hr/>
+<table class="table text-center"> -->
+<tr><td>      </td><td>     </td></tr>
+<tr><td>      </td><td>     </td></tr>
+<tr>
+    <th>Species: </th>
+    <td>{{profile.species}}</td>
+</tr>
+<tr>
+    <th>Country: </th>
+    <td>{{profile.country}}</td>
+</tr>
+<tr>
+    <th>City: </th>
+    <td>{{profile.city}}</td>
+</tr>
+<tr>
+    <th>Email: </th>
+    <td>{{profile.email}}</td>
+</tr>
+<tr>
+    <th>Friends: </th>
+    <td>{{profile.friends.length}}</td>  
+</tr>
+</table>
+</div>
+
+<!-- TODO: display friends pictures -->
+
+
+
+
+
+
+
+<!-- <table class="table text-center" *ngFor="let friendId of profile.friends">
+    <tr rowspan="2" class="mb-auto flex-row"> -->
+        <!-- <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
+        <td>{{getFriendInfo(friendId).name}}</td> -->
+   <!-- </tr>
+</table> -->
+
+
+<!-- <p *ngFor="let friendId of profile.friends">
+    {{profile.friends}}
+</p> -->

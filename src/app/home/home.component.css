@@ -3,7 +3,7 @@
     color: white;
 }
 
-.form-group{
+.form-group, table{
     border: 1px cadetblue solid;
     padding: 2rem;
 }
