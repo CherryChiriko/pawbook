@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { ChatService } from 'src/app/services/chat.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
 
@@ -8,7 +9,9 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  constructor( private users: UserService, private sidebar: SidebarService, private eRef: ElementRef){}
+  constructor( private users: UserService, private sidebar: SidebarService, 
+    private eRef: ElementRef, private chats: ChatService
+    ){}
 
   // isOpen : boolean = false;
   searchBody: string = '';
@@ -39,4 +42,8 @@ export class SidebarComponent implements OnInit {
     this.friendsIds = [... result.map(res => res.id)];
   }
   searchContent(event: any){    this.searchBody = event.target.value;  }
+
+  openNewChat(friendId : number){
+    this.chats.openNewChat(friendId)
+  }
 }

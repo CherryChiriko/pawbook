@@ -1,8 +1,5 @@
-/* *{
-    text-align:center;
-} */
 #sidebar-div{
-    width:30%; min-width: 300px;
+    width: 25%; min-width: 300px;
     height: 50%;
     background-color: #4c7e80;
     position: absolute;
@@ -11,7 +8,6 @@
     color: white;
     border: solid white 1px;
     z-index: 2;
-    /* overflow-y: auto; */
 }
 #search-addon{
     background-color: white;
@@ -34,10 +30,8 @@ td{ vertical-align: middle;}
 a {color: white;}
 
 #head{
-    position:fixed;
-    width: 27%;
+    position: relative;
 }
 #body{
-    margin-top: 5.5rem;
     overflow-y:auto;
 }

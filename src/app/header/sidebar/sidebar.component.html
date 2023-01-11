@@ -17,25 +17,10 @@
                 <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
                 <td>{{getFriendInfo(friendId).name}}</td>
             <tr><td><span>
-                <a class="btn" (click)="turnOff()"><i class="material-symbols-outlined">chat</i></a>
+                <a class="btn" (click)="openNewChat(friendId)"><i class="material-symbols-outlined">chat</i></a>
                 <a class="btn" routerLink="user/{{friendId}}" (click)="turnOff()"><i class="material-symbols-outlined">account_circle</i></a>
             </span></td>
         </tr>
         </table>
     </div>
 </div>
-
-
-
-
-<!-- <table class="table text-center" *ngFor="let friendId of friendsIds">
-    <tr rowspan="2" class="nav nav-pills flex-row mb-auto">
-        <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
-        <td>{{getFriendInfo(friendId).name}}</td>
-    <tr>     <td>{{getFriendInfo(friendId).name}}</td>
-   </tr><tr><td><span>
-            <i class="material-symbols-outlined">chat</i> 
-            <i class="material-symbols-outlined">account_circle</i>
-        </span></td>
-    </tr>
-</table> -->

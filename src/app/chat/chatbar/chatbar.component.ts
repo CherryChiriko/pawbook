@@ -17,7 +17,8 @@ export class ChatbarComponent implements OnInit{
   isOpen : boolean[] = []
 
   ngOnInit(): void {
-    this.openChats = [1,5];
+    this.openChats = this.chats.openChats;
+    // [1,5];
     this.isOpen = [false,false,false];
   }
 
@@ -29,4 +30,7 @@ export class ChatbarComponent implements OnInit{
     return this.chats.toggleChat(this.isOpen, index)
   }
 
+  // openNewChat(friendId : number){
+  //   this.chats.openNewChat(friendId)
+  // }
 }

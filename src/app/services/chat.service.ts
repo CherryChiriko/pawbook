@@ -15,7 +15,7 @@ export class ChatService {
     {senderId: 0, receiverId: 1, content: ["I'm still waiting for lunch"]},
   ]
 
-  // openChats(){}
+  openChats : number[] = [];
 
   getAllMsgs(friendId : number){
     console.log(this.getChatWithFriend(friendId));
@@ -39,7 +39,8 @@ export class ChatService {
       this.chats[chatIndex].content.push(body);
     }
     else {
-      this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
+      // console.log(this.chats, friendId , {senderId: 0, receiverId: friendId, content: [body]})
+      this.chats.push( {senderId: 0, receiverId: friendId, content: [body]});
     }
   }
 
@@ -48,4 +49,10 @@ export class ChatService {
     i !== index ? arr[i]=false : arr[i] = !arr[i])
     return arr[index]
   }
+
+  openNewChat(friendId : number){
+    this.openChats.length === 3 ? this.openChats.shift() : null;
+    this.openChats.push(friendId);
+  }
+
 }

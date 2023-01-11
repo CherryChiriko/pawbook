@@ -1,31 +1,62 @@
+<!-- <div class="container rounded">
+    <div id="head">
+        <h4>{{friend.name}}</h4>
+    </div>
+
+    <div id="body" class="rounded">
+        <table class="table text-center">
+            <tbody *ngFor="let chat of arr">
+                <tr *ngFor="let body of chat.content; let i=index">
+                    <td class="col-1 pic" >
+                        <img src="{{getPicture(chat.senderId)}}" *ngIf="i === 0">
+                    </td>
+                    <td class="col-2"  >
+                        {{chat.content[i]}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+
+    <div id="foot">
+        <div class="input-group mb-3">
+            <input type="text" (change)="addMsgContent($event)" 
+            class="form-control">
+            <div class="input-group-append">
+              <button class="btn" type="button" (click)="add()">
+                <i class="material-symbols-outlined">send</i>
+            </button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-center"> -->
 <div class="container rounded">
-    
-    <div id="table-div" class="rounded">
-    <table class="table text-center">
-        <thead>
-            <tr><td>   </td></tr>
-            <tr colspan="3">{{friend.name}}</tr>
-            <tr>   <td>   </td>      </tr>
-        </thead>
-        <tbody *ngFor="let chat of arr">
+    <div id="head">
+        <h4>{{friend.name}}</h4>
+    </div>
+    <div id="body">
+        <table class="table text-center" *ngFor="let chat of arr">
             <tr *ngFor="let body of chat.content; let i=index">
                 <td class="col-1 pic" >
                     <img src="{{getPicture(chat.senderId)}}" *ngIf="i === 0">
                 </td>
-                <td class="col-2"  >
+                <td class="col-2 rounded msg" >
                     {{chat.content[i]}}
                 </td>
             </tr>
-        </tbody>
-    </table>
+        </table>
     </div>
-    <div class="input-group mb-3">
-        <input type="text" (change)="addMsgContent($event)" 
-        class="form-control">
-        <div class="input-group-append">
-          <button class="btn" type="button" (click)="add()">
-            <i class="material-symbols-outlined">send</i>
-        </button>
+    <div id="foot">
+        <div class="input-group mb-3">
+            <input type="text" (change)="addMsgContent($event)" 
+            class="form-control">
+            <div class="input-group-append">
+              <button class="btn" type="button" (click)="add()">
+                <i class="material-symbols-outlined">send</i>
+            </button>
+            </div>
         </div>
     </div>
 </div>

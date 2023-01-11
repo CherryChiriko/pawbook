@@ -1,39 +1,39 @@
 .container{
     max-width: 300px;
-    height: 400px;
-    overflow-y: auto;
+    height:30%; min-height: 330px;
+    /* overflow-y: auto; */
+
     position: absolute;
     right: .75rem;
     bottom: .75rem;
-    background-color: red;
-    
+        
     background-color: #cee1e2;
-    
     border: 1px solid #395e60;
 }
-img{
-    height: 4rem;
-}
-thead{
-    font-size: 1.1rem;
+img{    height: 4rem;  border: white 1px solid; padding: 0;}
+.msg{   background-color: white;}
+h4{
     font-weight: bold;
     color: #395e60;
-    border: transparent;
-}
-tbody{
-    background-color: white;
-}
-#table-div{
-    height:30%;
+    margin: 1rem;
 }
 .btn{
     border: 1px solid #395e60;
     color: #395e60;
     background-color: #9fc4c6;
-
 }
-.input-group{
+
+/* .input-group{
     position: absolute;
     bottom: .75rem;
     width: 92%;
+} */
+#head, #foot{
+    position: relative;
 }
+#body{
+    overflow-y:auto;
+}
+/* #foot {
+    bottom: .5rem;
+} */
