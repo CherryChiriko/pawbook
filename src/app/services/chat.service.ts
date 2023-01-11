@@ -15,10 +15,7 @@ export class ChatService {
     {senderId: 0, receiverId: 1, content: ["I'm still waiting for lunch"]},
   ]
 
-  posts : IPost[] = [
-    { userId: 0, content: 'Another day in this prison...'},
-    { userId: 1, content: 'Hop hop! :D'}
-  ];
+  // openChats(){}
 
   getAllMsgs(friendId : number){
     console.log(this.getChatWithFriend(friendId));
@@ -33,13 +30,6 @@ export class ChatService {
       )
   }
 
-  // updateChat(body: string, friendId: number){
-
-  // }
-
-  // updateMsg(){
-
-  // }
   addMsg(body: string, friendId: number){
     let chatsWithFriend = this.getChatWithFriend(friendId);
     let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
@@ -51,15 +41,11 @@ export class ChatService {
     else {
       this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
     }
-    // console.log(chatMsg)
-    // console.log(chatsWithFriend[chatsWithFriend.length-1].content)
-    // if (chatsWithFriend[chatsWithFriend.length-1].senderId === 0){
-    //   this.chats[this.chats.length-1].content.push(body);
-    // }
+  }
 
-
-    // else{
-    //   this.chats.unshift( {senderId: 0, receiverId: friendId, content: [body]});
-    // }
+  toggleChat(arr : boolean[], index: number){
+    arr.map( (_, i) =>
+    i !== index ? arr[i]=false : arr[i] = !arr[i])
+    return arr[index]
   }
 }

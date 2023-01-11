@@ -1,3 +1,22 @@
-<div class="container">
-    <app-chatbox [friendId] = "friendId"></app-chatbox>
+<div class="container d-flex justify-content-center" id="chatbox-div">
+    <div>
+        <table class="table table-row">
+            <tr >
+                <td *ngFor="let friendId of openChats; let i=index">
+                    <button class="btn" (click)="toggleChat(i)">
+                        <img src="{{getPicture(friendId)}}">
+                        <i class="material-symbols-outlined">chat_bubble</i>
+                    </button>
+                    <app-chatbox [friendId] = "friendId" *ngIf="isOpen[i]"></app-chatbox>
+                </td>
+                <!-- <td><app-chatbox [friendId] = "friendId"></app-chatbox></td> -->
+            </tr>
+        </table>
+    </div>
 </div>
+
+
+<!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#chatbox">
+        <i class="material-symbols-outlined">chat_bubble</i>
+    </button> -->
+    <!-- <div class="collapse" id="chatbox"-->

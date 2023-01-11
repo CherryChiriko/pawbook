@@ -1,23 +1,28 @@
-<div id="sidebar-div" class="d-flex flex-column flex-shrink-0 p-3">
-    <h4>Friends List</h4>
-    <div class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Search" id="search-bar"
-        (change)="searchContent($event)"/>
-        <button class="input-group-text border-0" id="search-addon"
-        (click)="search()">
-            <span class="material-symbols-outlined">search</span>
-        </button>
+<div id="sidebar-div" class="d-flex flex-column flex-shrink-0 p-3 text-center">
+    <!-- list-group list-group-flush overflow-auto vh-100 -->
+    <div id="head">
+        <h4>Friends List</h4>
+        <div class="input-group rounded">
+            <input type="search" class="form-control rounded" placeholder="Search" id="search-bar"
+            (change)="searchContent($event)"/>
+            <button class="input-group-text border-0" id="search-addon"
+            (click)="search()">
+                <span class="material-symbols-outlined">search</span>
+            </button>
+        </div>
     </div>
-    <table class="table text-center" *ngFor="let friendId of friendsIds">
-        <tr rowspan="2" class="mb-auto flex-row">
-            <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
-            <td>{{getFriendInfo(friendId).name}}</td>
-        <tr><td><span>
-            <a routerLink="chat/{{friendId}}" (click)="turnOff()"><i class="material-symbols-outlined">chat</i></a>
-            <a routerLink="user/{{friendId}}" (click)="turnOff()"><i class="material-symbols-outlined">account_circle</i></a>
-        </span></td>
-       </tr>
-    </table>
+    <div id="body">
+        <table class="table text-center" *ngFor="let friendId of friendsIds">
+            <tr rowspan="2" class="mb-auto flex-row">
+                <td rowspan="2"><img src="{{getFriendInfo(friendId).profilePic}}"></td>
+                <td>{{getFriendInfo(friendId).name}}</td>
+            <tr><td><span>
+                <a class="btn" (click)="turnOff()"><i class="material-symbols-outlined">chat</i></a>
+                <a class="btn" routerLink="user/{{friendId}}" (click)="turnOff()"><i class="material-symbols-outlined">account_circle</i></a>
+            </span></td>
+        </tr>
+        </table>
+    </div>
 </div>
 
 
