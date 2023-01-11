@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IChat, IPost } from '../interfaces/interfaces';
+import * as chatsData from '../data/chats.json'
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,7 @@ export class ChatService {
 
   constructor() { }
 
-  chats : IChat[] = [
-    {senderId: 1, receiverId: 0, content: ["Hey, how are you?"]},
-    {senderId: 0, receiverId: 1, content: ["Not so well...", "I haven't eaten yet"]},
-    {senderId: 5, receiverId: 0, content: ["Hi hi!", "What a nice day"]},
-    {senderId: 0, receiverId: 1, content: ["I'm still waiting for lunch"]},
-  ]
+  chats : IChat[] = chatsData;
 
   openChats : number[] = [];
 

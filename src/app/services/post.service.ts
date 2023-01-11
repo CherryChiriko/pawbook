@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IPost } from '../interfaces/interfaces';
+import * as postsData from '../data/posts.json'
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,7 @@ export class PostService {
 
   constructor() { }
 
-  posts : IPost[] = [
-    { userId: 0, content: 'Another day in this prison...'},
-    { userId: 1, content: 'Hop hop! :D'}
-  ];
+  posts : IPost[] = postsData;
 
   getAllPosts(){return this.posts; }
   addPost(body: string){
