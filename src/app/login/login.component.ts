@@ -11,13 +11,13 @@ import { UserService } from '../services/user.service';
 })
 
 export class LoginComponent {
-  successMessage: string = '';
 
+  alertMessage: string = '';
+  reactiveForm !: FormGroup;
   constructor(private route: Router, private users: UserService){
   }
 
-  reactiveForm !: FormGroup;
-
+  
   ngOnInit() {
     this.reactiveForm = new FormGroup({
       email: new FormControl(null, [Validators.required,
@@ -25,15 +25,19 @@ export class LoginComponent {
       ]),
       password: new FormControl(null, [Validators.required])
     }
-    ,this.formValidation
   )    
   }
 
-  register(){
-    this.successMessage = "User data registered successfully"
-    this.route.navigate(['/home'])
+  login(){
+    const val = this.reactiveForm.value;
+    this.getUser(val.email, val.password ) ? this.route.navigate(['/home']) : 
+    this.alertMessage = "User data not found"
+    
   }
 
+  getUser(email: string, password: string){
+    return this.users.findUser(email, password);
+  }
   // formValidation(control: AbstractControl){
   //   // const psw = 'Ih8U'; const eml = 'pixie@gmail.com';
   //   const pswCtrl = control.get('password');
@@ -83,14 +87,14 @@ export class LoginComponent {
   //   return (pswCtrl && emailCtrl) ? null: this.getUser(pswCtrl, emailCtrl);
   //   // return (pswCtrl && emailCtrl) ? this.getUser(pswCtrl?.value, emailCtrl?.value) : null;
   // }
-  getUser(email: string, password: string){
-    return this.users.findUser(email, password);
-  }
-  formValidation(control: AbstractControl) {
-    const pswCtrl = control.get('password');
-    const emailCtrl = control.get('email');
-    return pswCtrl && emailCtrl && this.getUser(pswCtrl.value, emailCtrl.value) ?
-    {mismatch: true} : null
-  }
+
+
+  
+  // formValidation(control: AbstractControl) {
+  //   const pswCtrl = control.get('password');
+  //   const emailCtrl = control.get('email');
+  //   return pswCtrl && emailCtrl && this.getUser(pswCtrl.value, emailCtrl.value) ?
+  //   {mismatch: true} : null
+  // }
 
 }

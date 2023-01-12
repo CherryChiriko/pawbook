@@ -1,9 +1,9 @@
-<div *ngIf="successMessage !== ''" class="alert alert-success text-center my-4">
-    {{successMessage}}
+<div *ngIf="alertMessage !== ''" class="alert alert-danger text-center my-4">
+    {{alertMessage}}
 </div>
 
 <div class="container rounded">
-<form [formGroup]="reactiveForm" (ngSubmit)="register()">
+<form [formGroup]="reactiveForm" (ngSubmit)="login()">
   <div class="form-row form-group">
     <div class="col">
       <input type="email" name="email" id="email" 
