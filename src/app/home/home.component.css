@@ -1,8 +1,11 @@
+.container{
+    margin-bottom: 5rem;
+}
+
 .btn{
     background-color: var(--dark-color);
     color: white;
 }
-
 .form-group{
     background-color: var(--light-color);
     color: cadetblue;
@@ -19,7 +22,6 @@ img{
 }
 
 .card{
-    /* background: var(--light-color); */
     background-color: white;
     border: 2px solid var(--darker-color);
     color: var(--darker-color);
@@ -38,4 +40,5 @@ img{
 }
 a{ text-decoration: none}
 h5{ margin: .5rem 0 .7rem 0 ;}
+
 

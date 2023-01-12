@@ -9,11 +9,12 @@
       </a>
 
       <div class=" right-div navbar-toggler">
-        <a routerLink='/user/{{loginId}}'>
+        <a routerLink='/user/0'>
         <!-- <a routerLink="loginCheck ? '/user/0' : null"> -->
-            <img *ngIf="loginId > -1" 
+            <img 
             src="../assets/images/pixie.jpg" id="profile-pic"
         class="d-inline-block align-text-top">
+        <!-- *ngIf="loginId > -1"  -->
         </a>
       <button class="navbar-toggler" type="button"
         (click)="toggleSidebar()">
