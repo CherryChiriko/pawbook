@@ -30,7 +30,6 @@ export class SidebarComponent implements OnInit {
   //     this.turnOff();}
   // }
 
-  loginCheck(){ return this.users.loginCheck(0);}
   // toggleBar(){ this.isOpen = this.sidebar.toggleSidebar();}
   // toggleBar(){ this.isOpen = false;}
   turnOff(){ this.sidebar.turnOffSidebar(); console.log("I should be off")}

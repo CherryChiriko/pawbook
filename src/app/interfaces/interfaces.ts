@@ -5,7 +5,6 @@ export interface IUser {
     email: string,
     country: string,
     city: string,
-    isLoggedIn: boolean,
     password : string,
     friends : number[],
     profilePic: string

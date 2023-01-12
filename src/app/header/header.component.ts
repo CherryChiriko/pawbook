@@ -11,13 +11,21 @@ export class HeaderComponent implements OnInit {
   constructor( private users: UserService, private sidebar: SidebarService){}
 
   isOpen : boolean = this.sidebar.isOpen;
-  friendsIds ?: number[] = this.users.getUserInfo(0).friends;
+  loginId : number = -1;  
+  // friendsIds ?: number[] = this.users.getUserInfo(this.loginId).friends;
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { 
+    this.loginId = this.users.getLoginId();
+    console.log(this.loginId)
+  }
 
-  loginCheck(){return this.users.loginCheck(0);}
+
+  // loginCheck(id?:number){return 0}
+  // loginCheck(){return this.users.loginCheck();}
+
   toggleSidebar(){
-    console.log("I am header: ", this.isOpen)
+    // console.log("I am header: ", this.isOpen)
     this.isOpen = this.sidebar.toggleSidebar();
+    console.log(this.loginId);
   }
 }

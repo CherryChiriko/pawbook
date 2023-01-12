@@ -1,37 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { IUser } from '../interfaces/interfaces';
 import usersData from '../data/users.json'
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnInit{
+  users : IUser[] = usersData;
+  loginId !: number;
 
   constructor() {}
-  users : IUser[] = usersData;
+  ngOnInit(): void {
+    this.loginId = -1;
+  }
+  
+  getUserInfo(id: number){    return this.users[id];  }
+  getUserFromId(id:number){    return this.users.find(user => user.id === id)  }
+  getLoginId(): number { return this.loginId}
 
-  emailCheck(email : string): (number|null) {
-    let result = this.users.filter(user => email === user.email);
-    return result.length? result[0].id : null;
+  findUserLogin(email: string, password: string) : boolean{
+    let matchUser = this.users.find(user => email === user.email);
+    if (matchUser?.password === password){
+      this.loginId = matchUser.id; return true;
+    }
+    this.loginId = -1; return false;      
   }
-  loginCheck(id : number): boolean{
-    return this.users[id].isLoggedIn;
-  }
-  getUserInfo(id: number){
-    return this.users[id];
-  }
-  getAllUsers(){return this.users}
-  getUserFromId(id:number){
-    return this.users.filter(user => user.id === id)
-  }
-
-  findUser(email: string, password: string){
-    let matchId = this.emailCheck(email);
-    if (matchId === null) return false;
-    return this.getUserInfo(matchId).password === password;
-    // return this.getUserInfo(matchId).password === password ? null : {notFound: true};
-  }
-
+    // return matchUser === undefined ? -1 : 
+    // matchUser.password === password ? matchUser.id : -1;
 
   filterSearch(body: string){
     let friendsIds: number[] = this.getUserInfo(0).friends;

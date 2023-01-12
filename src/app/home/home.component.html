@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="form-group">
+    <div class="form-group rounded">
         <div class="form-row">
         <input type="text"    (change)="addPostContent($event)" class="form-control text-center" placeholder="What's on your mind?">
         </div>
@@ -12,8 +12,9 @@
     <div *ngFor="let post of arr">
     <div class="card h-100 text-center">
             <div class="img-square-wrapper">
-                <img class="" src="{{animals.getUserInfo(post.userId).profilePic}}">
-                <h5 class="card-title">{{animals.getUserInfo(post.userId).name}}</h5>
+                <a routerLink='/user/{{post.userId}}'>
+                    <img class="" src="{{animals.getUserInfo(post.userId).profilePic}}">
+                <h5 class="card-title">{{animals.getUserInfo(post.userId).name}}</h5></a>
             </div>
             <div class="card-body rounded">
                 <p class="card-text">{{post.content}}</p>

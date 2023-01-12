@@ -1,23 +1,18 @@
-<!-- <nav class="navbar navbar-expand-lg mb-4">
-    <a routerLink="/home">PawBook</a>
-    <a routerLink="loginCheck ? '/user/0' : null">User</a> -->
-
-    <!-- <a routerLink="/user/0" (click)="getLoginState()">Get</a> -->
-<!-- </nav> -->
-
-
 <nav class="navbar navbar-dark mb-4">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/home">
+      <!-- <p style="color:red">{{loginId}}</p> -->
+      <a class="navbar-brand" routerLink='/home'>
+      <!-- routerLink="loginCheck()>-1 ? '/home' : null"> -->
         <img src="../favicon.ico" alt="" width="45" height="45" 
         class="d-inline-block align-text-top">
         PawBook
       </a>
 
       <div class=" right-div navbar-toggler">
-        <a *ngIf="loginCheck" routerLink='/user/0'>
+        <a routerLink='/user/{{loginId}}'>
         <!-- <a routerLink="loginCheck ? '/user/0' : null"> -->
-            <img src="../assets/images/pixie.jpg" alt="" id="profile-pic"
+            <img *ngIf="loginId > -1" 
+            src="../assets/images/pixie.jpg" id="profile-pic"
         class="d-inline-block align-text-top">
         </a>
       <button class="navbar-toggler" type="button"
