@@ -1,39 +1,41 @@
 .container{
     width: 300px;
-    height:30%; min-height: 330px;
-    z-index: 1;
+    height:30%; min-height: 350px;
 
     position: absolute;
     right: .75rem;
     bottom: .2rem;
+    z-index: 1;
 
     background-color: var(--lighter-color);
     border: 1px solid var(--darker-color);
+    font-size: .8rem;
 }
-img{    height: 4rem;  border: white 1px solid; padding: 0;}
+img{    
+    height: 4rem;  
+    border: white 1px solid; 
+    padding: 0;
+}
 .msg{   background-color: white;}
-h4{
+h5{
     font-weight: bold;
     color: var(--darker-color);
-    margin: 1rem;
+    margin: .75rem;
 }
-.btn{
+#input-btn{
     border: 1px solid var(--darker-color);
     color: var(--darker-color);
     background-color: var(--light-color);
 }
-
-/* .input-group{
-    position: absolute;
-    bottom: .75rem;
-    width: 92%;
-} */
-#head, #foot{
-    position: relative;
-}
-#body{
+.card-body{
     overflow-y:auto;
+    margin-top: .5rem;
 }
-/* #foot {
-    bottom: .5rem;
-} */
+table{
+    border-collapse: separate;
+    border-spacing:0 .5rem;
+    padding-left: 0;
+}
+.card-footer{
+    padding-bottom: 0;
+}

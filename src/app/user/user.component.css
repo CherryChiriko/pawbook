@@ -6,9 +6,9 @@ img {
 }
 .container{
     width:80%; max-width: 800px;
-    border: 3px solid #395e60;
+    border: 3px solid var(--darker-color);
     margin-top: 2rem;
-    background-color: #9fc4c6;
+    background-color: var(--light-color);
 }
 #name {
     color: #395e60;
@@ -18,5 +18,10 @@ img {
 table {    table-layout: fixed;}
 th{color: #395e60; }
 td{    padding: 5px;}
-.main{    border-bottom: solid 2px #395e60;}
+.main{    border-bottom: solid 2px var(--darker-color);}
+.btn{ 
+    background-color: var(--lighter-color);
+    border: 1px solid var(--darker-color);
+    color: var(--darker-color);
+}
 

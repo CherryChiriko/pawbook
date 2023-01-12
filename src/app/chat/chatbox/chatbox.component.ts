@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IChat, IUser } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
@@ -10,7 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChatboxComponent {
   @Input() friendId !: number;
-  // @Output() isOpen: boolean = true;
+  @Output() closeBox: EventEmitter<number> = new EventEmitter();
+  @Output() reduceBox: EventEmitter<number> = new EventEmitter();
 
   friend !: IUser;
   msgContent: string = '';
@@ -29,5 +30,8 @@ export class ChatboxComponent {
     this.msgContent = event.target.value;
   }
   add(){ this.chat.addMsg(this.msgContent, this.friendId)}
+
+  close(id: number){ this.closeBox.emit(id) }
+  reduce(id: number){ this.reduceBox.emit(id) }
   
 }

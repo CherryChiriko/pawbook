@@ -18,7 +18,6 @@ export class ChatbarComponent implements OnInit{
 
   ngOnInit(): void {
     this.openChats = this.chats.openChats;
-    // [1,5];
     this.isOpen = [false,false,false];
   }
 
@@ -30,7 +29,10 @@ export class ChatbarComponent implements OnInit{
     return this.chats.toggleChat(this.isOpen, index)
   }
 
-  // openNewChat(friendId : number){
-  //   this.chats.openNewChat(friendId)
-  // }
+  closeBoxHandler(friendId: number){
+    this.chats.closeChat(friendId)
+  }
+  reduceBoxHandler(friendId: number){
+    this.isOpen = this.chats.reduceChat(this.isOpen, friendId);
+  }
 }

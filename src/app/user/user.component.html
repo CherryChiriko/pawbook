@@ -1,36 +1,83 @@
 <!-- <p *ngIf="isLoggedIn">I am logged-in</p> -->
 <div class="container">
+    <form [formGroup]="reactiveForm" (ngSubmit)="update()">
 <table class="table text-center expand-md">
 <tr class="main">
-    <td><img src="{{profile.profilePic}}"></td>
-    <td><h2 id ="name">{{profile.name}}</h2></td>
+    <td class="col"><img src="{{profile.profilePic}}"></td>
+    <td class="col">
+        <h2 id ="name" *ngIf="!editMode">{{profile.name}}</h2>
+        <h2 *ngIf="editMode">
+            <div class="form-row form-group">
+                <input type="text" name="name" id="name" 
+                  class="form-control text-center" placeholder="{{profile.name}}"
+                  formControlName = "name">
+              </div>
+        </h2>
+    </td>
+    <td class="col-1" *ngIf="profile.id === 0">
+        <button class="btn" (click)="edit()">
+            <i class="material-symbols-outlined">edit</i></button>
+    </td>
+
 </tr>
-<!-- </table>
-<hr/>
-<table class="table text-center"> -->
 <tr><td>      </td><td>     </td></tr>
 <tr><td>      </td><td>     </td></tr>
+
 <tr>
+    
     <th>Species: </th>
-    <td>{{profile.species}}</td>
+    <td *ngIf="!editMode">{{profile.species}}</td>
+    <td *ngIf="editMode">
+        <div class="form-row form-group">
+          <input type="text" name="species" id="species" 
+            class="form-control text-center" placeholder="{{profile.species}}"
+            formControlName = "species">
+        </div>
+    </td>
 </tr>
 <tr>
     <th>Country: </th>
-    <td>{{profile.country}}</td>
+    <td *ngIf="!editMode">{{profile.country}}</td>
+    <td *ngIf="editMode">
+        <div class="form-row form-group">
+          <input type="text" name="country" id="country" 
+            class="form-control text-center" placeholder="{{profile.country}}"
+            formControlName = "country">
+        </div>
+    </td>
 </tr>
 <tr>
     <th>City: </th>
-    <td>{{profile.city}}</td>
+    <td *ngIf="!editMode">{{profile.city}}</td>
+    <td *ngIf="editMode">
+        <div class="form-row form-group">
+          <input type="text" name="city" id="city" 
+            class="form-control text-center" placeholder="{{profile.city}}"
+            formControlName = "city">
+        </div>
+    </td>
 </tr>
 <tr>
     <th>Email: </th>
-    <td>{{profile.email}}</td>
+    <td *ngIf="!editMode">{{profile.email}}</td>
+    <td *ngIf="editMode">
+        <div class="form-row form-group">
+          <input type="email" name="email" id="email" 
+            class="form-control text-center" placeholder="{{profile.email}}"
+            formControlName = "email">
+        </div>
+    </td>
 </tr>
 <tr>
     <th>Friends: </th>
     <td>{{profile.friends.length}}</td>  
 </tr>
+
 </table>
+</form>
+<div class="text-center" *ngIf="editMode">
+    <button type="submit" class="btn mb-4" (click)="update()">Apply Changes</button> 
+ </div>
 </div>
 
 <!-- TODO: display friends pictures -->

@@ -54,4 +54,15 @@ export class ChatService implements OnInit{
     this.openChats.push(friendId);}
   }
 
+  closeChat(friendId: number){
+    const index = this.openChats.indexOf(friendId);
+    const x = this.openChats.splice(index, 1);
+    console.log("what is x? ", x);
+  }
+  reduceChat(arr : boolean[], friendId: number){
+    let index = this.openChats.indexOf(friendId);
+    // this.toggleChat(arr, index)
+    arr[index] = false;
+    return arr;
+  }
 }

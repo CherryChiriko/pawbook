@@ -32,7 +32,7 @@
 </div> -->
 
 <!-- <div class="d-flex flex-column flex-shrink-0 p-3 text-center"> -->
-<div class="container rounded">
+<!-- <div class="container rounded">
     <div id="head">
         <h4>{{friend.name}}</h4>
     </div>
@@ -59,4 +59,46 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="card container rounded ">
+    <div id="head" class="card-header">
+        <div class="row">
+        <h5 class="col">{{friend.name}}</h5>
+        <button class="btn" (click)="reduce(friend.id)">
+            <i class="col-1 material-symbols-outlined" >remove</i>
+        </button>
+        <button class="btn" (click)="close(friend.id)">
+            <i class="col-1 material-symbols-outlined">close</i>
+        </button></div>
+    </div>
+    <div id="body" class="card-body">
+        <table class="table text-center" *ngFor="let chat of arr">
+            <tr *ngFor="let body of chat.content; let i=index">
+                <td class="col-1 pic" >
+                    <img src="{{getPicture(chat.senderId)}}" *ngIf="i === 0">
+                </td>
+                <td class="col-2 rounded msg" >
+                    {{chat.content[i]}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div class="input-group mb-3">
+            <input type="text" (change)="addMsgContent($event)" 
+            class="form-control">
+            <div class="input-group-append">
+              <button class="btn" type="button" id="input-btn" (click)="add()">
+                <i class="material-symbols-outlined">send</i>
+            </button>
+            </div>
+        </div>
+    </div>
+        <!-- <div>
+        <div class="card h-100 text-center">
+            <button class="btn">
+                <img src="">
+            </button>
+        </div> -->
 </div>
