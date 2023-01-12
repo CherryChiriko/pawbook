@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
-import { IChat, IPost } from '../interfaces/interfaces';
-import * as chatsData from '../data/chats.json'
+import { Injectable, OnInit } from '@angular/core';
+import { IChat } from '../interfaces/interfaces';
+import chatsData from '../data/chats.json'
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class ChatService implements OnInit{
 
   constructor() { }
+  ngOnInit(){ console.log(chatsData) }
 
-  chats : IChat[] = chatsData;
+  chats : IChat[] = chatsData
 
   openChats : number[] = [];
 
@@ -27,15 +28,16 @@ export class ChatService {
   }
 
   addMsg(body: string, friendId: number){
+
     let chatsWithFriend = this.getChatWithFriend(friendId);
     let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
     let chatMsg = this.chats.find(msg => msg === lastMsg);
-    let chatIndex = this.chats.findIndex(msg => msg === lastMsg)
+    // let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
+
     if (chatMsg?.senderId === 0){
-      this.chats[chatIndex].content.push(body);
+      chatMsg.content.push(body);
     }
     else {
-      // console.log(this.chats, friendId , {senderId: 0, receiverId: friendId, content: [body]})
       this.chats.push( {senderId: 0, receiverId: friendId, content: [body]});
     }
   }
@@ -47,8 +49,9 @@ export class ChatService {
   }
 
   openNewChat(friendId : number){
+    if (this.openChats.indexOf(friendId)<= -1){
     this.openChats.length === 3 ? this.openChats.shift() : null;
-    this.openChats.push(friendId);
+    this.openChats.push(friendId);}
   }
 
 }

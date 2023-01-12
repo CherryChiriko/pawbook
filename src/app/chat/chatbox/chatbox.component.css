@@ -6,21 +6,21 @@
     position: absolute;
     right: .75rem;
     bottom: .75rem;
-        
-    background-color: #cee1e2;
-    border: 1px solid #395e60;
+
+    background-color: var(--lighter-color);
+    border: 1px solid var(--darker-color);
 }
 img{    height: 4rem;  border: white 1px solid; padding: 0;}
 .msg{   background-color: white;}
 h4{
     font-weight: bold;
-    color: #395e60;
+    color: var(--darker-color);
     margin: 1rem;
 }
 .btn{
-    border: 1px solid #395e60;
-    color: #395e60;
-    background-color: #9fc4c6;
+    border: 1px solid var(--darker-color);
+    color: var(--darker-color);
+    background-color: var(--light-color);
 }
 
 /* .input-group{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../interfaces/interfaces';
-import * as usersData from '../data/users.json'
+import usersData from '../data/users.json'
 
 @Injectable({
   providedIn: 'root'

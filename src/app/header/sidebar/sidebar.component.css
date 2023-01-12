@@ -1,7 +1,7 @@
 #sidebar-div{
     width: 25%; min-width: 300px;
     height: 50%;
-    background-color: #4c7e80;
+    background-color: var(--dark-color);
     position: absolute;
     right: 2px;
     margin-top: -1.3rem;
