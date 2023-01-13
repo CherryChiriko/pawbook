@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IPost } from '../interfaces/interfaces';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
@@ -8,17 +8,18 @@ import { UserService } from '../services/user.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-  
-  constructor(private post: PostService, private users: UserService){}
-  arr = this.post.getAllPosts();
-  animals = this.users;
+export class HomeComponent implements OnInit{
 
+  arr !: IPost[];
+  animals : UserService = this.users;
   postContent: string = '';
 
-  
-  addPostContent(event: any){
-    this.postContent = event.target.value;
+  constructor(private post: PostService, private users: UserService){}
+
+  ngOnInit(): void {
+    this.arr = this.post.getFriendsPosts(0);
   }
-  add(){ this.post.addPost(this.postContent)}
+  
+  addPostContent(event: any){    this.postContent = event.target.value;  }
+  add(){ this.post.addPost(this.postContent); console.log(this.post.getFriendsPosts(0))}
 }
