@@ -10,7 +10,7 @@ img {
     margin-top: 2rem;
     background-color: var(--light-color);
 }
-#name {
+.name {
     color: #395e60;
     font-weight: bolder;
 }

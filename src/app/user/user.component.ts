@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUser } from '../interfaces/interfaces';
@@ -22,7 +22,6 @@ export class UserComponent implements OnInit {
   ngOnInit(): void { 
     this.routeSub = this.route.params.subscribe(params => {
       this.userId = params['id'];
-      console.log(this.users.getUserInfo(this.userId))
       this.profile = this.users.getUserInfo(this.userId);
     }); 
 
@@ -41,9 +40,17 @@ export class UserComponent implements OnInit {
   }
 
   edit(){this.editMode = !this.editMode; console.log(this.editMode)}
+
   update(){
     const val = this.reactiveForm.value;
+    console.log(val)
+    val.name !== null  ? this.profile.name = val.name : null;
+    val.species !== null  ? this.profile.species = val.species : null;
+    val.country !== null  ? this.profile.country = val.country : null;    
+    val.city !== null  ? this.profile.city = val.city : null;
+    val.email !== null && this.reactiveForm.valid ? this.profile.email = val.email : null;
   }
+
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }

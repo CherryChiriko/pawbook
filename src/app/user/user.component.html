@@ -5,11 +5,11 @@
 <tr class="main">
     <td class="col"><img src="{{profile.profilePic}}"></td>
     <td class="col">
-        <h2 id ="name" *ngIf="!editMode">{{profile.name}}</h2>
+        <h2 id ="name" *ngIf="!editMode" class="name">{{profile.name}}</h2>
         <h2 *ngIf="editMode">
             <div class="form-row form-group">
                 <input type="text" name="name" id="name" 
-                  class="form-control text-center" placeholder="{{profile.name}}"
+                  class="form-control text-center" placeholder="Name"
                   formControlName = "name">
               </div>
         </h2>
@@ -30,7 +30,7 @@
     <td *ngIf="editMode">
         <div class="form-row form-group">
           <input type="text" name="species" id="species" 
-            class="form-control text-center" placeholder="{{profile.species}}"
+            class="form-control text-center" placeholder="Species"
             formControlName = "species">
         </div>
     </td>
@@ -41,7 +41,7 @@
     <td *ngIf="editMode">
         <div class="form-row form-group">
           <input type="text" name="country" id="country" 
-            class="form-control text-center" placeholder="{{profile.country}}"
+            class="form-control text-center" placeholder="Country"
             formControlName = "country">
         </div>
     </td>
@@ -52,7 +52,7 @@
     <td *ngIf="editMode">
         <div class="form-row form-group">
           <input type="text" name="city" id="city" 
-            class="form-control text-center" placeholder="{{profile.city}}"
+            class="form-control text-center" placeholder="City"
             formControlName = "city">
         </div>
     </td>
@@ -63,7 +63,7 @@
     <td *ngIf="editMode">
         <div class="form-row form-group">
           <input type="email" name="email" id="email" 
-            class="form-control text-center" placeholder="{{profile.email}}"
+            class="form-control text-center" placeholder="Email"
             formControlName = "email">
         </div>
     </td>
@@ -75,9 +75,6 @@
 
 </table>
 </form>
-<div class="text-center" *ngIf="editMode">
-    <button type="submit" class="btn mb-4" (click)="update()">Apply Changes</button> 
- </div>
 </div>
 
 <!-- TODO: display friends pictures -->
