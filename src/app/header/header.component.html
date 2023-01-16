@@ -17,7 +17,7 @@
         <a *ngIf="loginId > -1" routerLink='/user/{{loginId}}'>
         <!-- <a routerLink="loginId ? '/user/0' : null"> -->
             <img 
-            src="../assets/images/pixie.jpg" id="profile-pic"
+            src="{{getPic(loginId)}}" id="profile-pic"
         class="d-inline-block align-text-top">
         <!-- *ngIf="loginId > -1"  -->
         </a>

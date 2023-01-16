@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { IChat, IChatBox } from '../interfaces/interfaces';
 import chatsData from '../data/chats.json'
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,32 @@ export class ChatService implements OnInit{
 
   chats : IChat[] = chatsData
   barChats : IChatBox[] =  [];
+  chatsSubject = new BehaviorSubject(this.chats);
+
+  loginId : number = -1;  
+  loginIdSubs ?: Subscription;
 
   constructor() { }
   ngOnInit(){  
     this.barChats = [];
   }
+  getChatsSubject(): Observable<IChat[]> { return this.chatsSubject}
 
-  getAllMsgs(friendId : number){
-    console.log(this.getChatWithFriend(friendId));
-    return this.getChatWithFriend(friendId); 
-  }
+  // getAllMsgs(friendId : number){
+  //   console.log(this.getChatWithFriend(friendId));
+  //   return this.getChatWithFriend(friendId); 
+  // }
 
   getChatWithFriend(friendId : number){
     return this.chats.filter(chat => {
+      let ids = [chat.senderId, chat.receiverId];
+      return (ids.indexOf(friendId)> -1)
+      }
+    )
+  }
+
+  getChatWithFriends(arr: IChat[], friendId : number){
+    return arr.filter(chat => {
       let ids = [chat.senderId, chat.receiverId];
       return (ids.indexOf(friendId)> -1)
       }
@@ -35,11 +49,11 @@ export class ChatService implements OnInit{
     // let chatMsg = this.chats.find(msg => msg === lastMsg);
     let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
 
-    if (chatMsg?.senderId === 0){
+    if (chatMsg?.senderId === this.loginId){
       chatMsg.content.push(body);
     }
     else {
-      this.chats.push( {senderId: 0, receiverId: friendId, content: [body]});
+      this.chats.push( {senderId: this.loginId, receiverId: friendId, content: [body]});
       // console.log(this.chats)
     }
   }
@@ -78,6 +92,9 @@ export class ChatService implements OnInit{
     // return this.barChats
   }
 
+  ngOnDestroy(){
+    this.loginIdSubs?.unsubscribe();
+  }
 }
 
 

@@ -9,8 +9,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./chatbar.component.css']
 })
 export class ChatbarComponent implements OnInit{
- 
-  // @Output() friendId !: number;
 
   constructor(private chats: ChatService, private users : UserService){}
 
@@ -21,7 +19,7 @@ export class ChatbarComponent implements OnInit{
   }
 
   getPicture(id: number){
-    return this.users.getUserInfo(id).profilePic
+    return this.users.getUserPicture(id);
   }
 
   toggleChat(chat : IChatBox){

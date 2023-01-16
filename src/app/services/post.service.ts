@@ -21,7 +21,7 @@ export class PostService {
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
 
-  getAllPosts(){return this.posts; }
+  // getAllPosts(){return this.posts; }
 
   getFriendsPosts(userId: number){
       let friendIds = this.users.getUserInfo(userId)?.friends;
@@ -34,13 +34,24 @@ export class PostService {
       )
   }
 
+  getFriendsPost(arr : IPost[], userId: number){
+    let friendIds = this.users.getUserInfo(userId)?.friends;
+    return arr.filter(post => {
+      return (
+        post.userId === this.loginId || (
+        friendIds.indexOf(post.userId)> -1)
+        )
+      }
+    )
+  }
+
   getPostsSubject(): Observable<IPost[]> { return this.postsSubject}
 
   addPost(body: string){
     let newPost = {userId: 0, content: body}
     this.posts.unshift( newPost);
-    // this.postsSubject.next(this.posts);    
-    console.log("posts ", this.posts)
+    // // this.postsSubject.next(this.posts);    
+    // console.log("posts ", this.posts)
   }
 
   ngOnDestroy(){

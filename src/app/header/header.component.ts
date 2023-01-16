@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
     // console.log("Link ", this.link)
   }
 
+  getPic(id: number){    return this.users.getUserPicture(id)  }
   toggleSidebar(){
     // this.sidebar.toggleSidebar();
     // this.sidebar.isOpen.next(!this.sidebar.isOpen.subscribe( val => this.isOpen = !val))

@@ -51,5 +51,6 @@ export class UserService implements OnInit{
     return result;
   }
 
+  getUserPicture(id: number){ return this.getUserInfo(id).profilePic}
   
 }

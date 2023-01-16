@@ -28,18 +28,13 @@ export class HomeComponent implements OnInit{
       val => this.loginId = val
     );
 
-    this.arr = this.post.getFriendsPosts(this.loginId);
-
     this.post.getPostsSubject().subscribe(
-      val => this.arr = val
+      val => this.arr = this.post.getFriendsPost(val, this.loginId)
     );
   }
   
   addPostContent(event: any){    this.postContent = event.target.value;  }
-  add(){ 
-    this.post.addPost(this.postContent); 
-    console.log(this.post.getFriendsPosts(0))
-  }
+  add(){     this.post.addPost(this.postContent);   }
 
   ngOnDestroy(){
     this.loginIdSubs?.unsubscribe();
