@@ -29,21 +29,22 @@ export class SidebarComponent implements OnInit {
   public text!: String;
   hostElem = this.eRef.nativeElement;
 
-  ngAfterViewInit() {
+  // ngAfterViewInit() {
     
-    console.log(this.hostElem.children);
-    console.log(this.hostElem.parentNode);
-  }
+  //   console.log(this.hostElem.children);
+  //   console.log(this.hostElem.parentNode);
+  // }
 
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
-    if(!this.eRef.nativeElement.contains(event.target) && !this.hostElem.parentNode.contains(event.target) ) {
-      console.log("clicking outside?")
+    if(!this.eRef.nativeElement.contains(event.target) && 
+    !this.hostElem.parentNode.contains(event.target) ) {
+      // console.log("clicking outside?")
       this.turnOff();}
   }
 
   turnOff(){ 
-    this.sidebar.turnOffSidebar(); console.log("I should be off")
+    this.sidebar.turnOffSidebar();
   }
   
   getFriendInfo(id: number){  return this.users.getUserInfo(id)}

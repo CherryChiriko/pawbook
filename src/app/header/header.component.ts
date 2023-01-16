@@ -11,23 +11,41 @@ import { UserService } from '../services/user.service';
 export class HeaderComponent implements OnInit {
   constructor( private users: UserService, private sidebar: SidebarService){}
 
-  isOpen : boolean = this.sidebar.isOpen;
+  // isOpen : boolean = this.sidebar.isOpen;
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
+  isOpen : boolean = false;  
+  isOpenSubs ?: Subscription;
 
   ngOnInit(): void { 
     this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
+    this.sidebar.getIsOpen().subscribe(
+      val => this.isOpen = val
+    )
   }
 
   toggleSidebar(){
-    this.isOpen = this.sidebar.toggleSidebar();
-    console.log(this.loginId);
+    // this.sidebar.toggleSidebar();
+    // this.sidebar.isOpen.next(!this.sidebar.isOpen.subscribe( val => this.isOpen = !val))
+    
+    
+    // this.sidebar.isOpen.subscribe(
+    //   val => this.isOpen = val
+    // )
+    // this.isOpen = !this.isOpen;
+    // this.sidebar.updateData(this.isOpen);
+    // console.log("Sidebar status: ", this.isOpen);
+
+    console.log("I start as: ", this.isOpen);
+    this.isOpen = !this.isOpen;
+    console.log("Now I should be different: ", this.isOpen)
   }
 
   ngOnDestroy(){
     this.loginIdSubs?.unsubscribe();
+    this.isOpenSubs?.unsubscribe();
   }
   
 }
