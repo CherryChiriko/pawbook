@@ -2,18 +2,16 @@ import { Injectable, OnInit } from '@angular/core';
 import { IChat, IChatBox } from '../interfaces/interfaces';
 import chatsData from '../data/chats.json'
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService{
-
-  chats : IChat[] = chatsData
-  barChats : IChatBox[] =  [];
   
-  chatsSubject = new BehaviorSubject(this.chats);
+  chat$ = new BehaviorSubject<IChat[]>(chatsData);
+  barChat$ = new BehaviorSubject<IChatBox[]>([]);
 
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
@@ -22,20 +20,12 @@ export class ChatService{
     this.loginIdSubs = this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
-    this.barChats = [];
   }
 
-  getChatsSubject(): Observable<IChat[]> { return this.chatsSubject}
+  getChatsSubject(): Observable<IChat[]> { return this.chat$}
+  getBarChatsSubject(): Observable<IChatBox[]> { return this.barChat$}
 
-  getChatWithFriend(friendId : number){
-    return this.chats.filter(chat => {
-      let ids = [chat.senderId, chat.receiverId];
-      return (ids.indexOf(friendId)> -1)
-      }
-    )
-  }
-
-  getChatWithFriends(arr: IChat[], friendId : number){
+  getChatWithFriend(arr: IChat[], friendId : number){
     return arr.filter(chat => {
       let ids = [chat.senderId, chat.receiverId];
       return (ids.indexOf(friendId)> -1)
@@ -44,91 +34,66 @@ export class ChatService{
   }
 
   addMsg(body: string, friendId: number){
-    this.chatsSubject.pipe(take(1)).subscribe(val =>
+    this.chat$.pipe(take(1)).subscribe(val =>
       {
-        let chatsWithFriend = this.getChatWithFriends(val, friendId);
+        let chatsWithFriend = this.getChatWithFriend(val, friendId);
         let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
         let chatMsg = val[val.indexOf(lastMsg)];
 
         if (chatMsg?.senderId === this.loginId){
           chatMsg.content.push(body);
-          this.chatsSubject.next(val);
+          this.chat$.next(val);
         }
         else {
           const newMsg = {senderId: this.loginId, receiverId: friendId, content: [body]}
-          this.chatsSubject.next([...val, newMsg])
+          this.chat$.next([...val, newMsg])
         }
       }
     )
-
-    // let chatsWithFriend = this.getChatWithFriend(friendId);
-    // let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
-    // let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
-
-    // if (chatMsg?.senderId === this.loginId){
-    //   this.chatsSubject.pipe(take(1)).subscribe(val =>
-    //     {
-    //       chatMsg.content.push(body);
-    //       this.chatsSubject.next(this.chats)
-    //     }
-    //     )
-    // }
-    // else {
-    // this.chatsSubject.pipe(take(1)).subscribe(val =>
-    //   {
-    //     const newMsg = {senderId: this.loginId, receiverId: friendId, content: [body]}
-    //     this.chatsSubject.next([...val, newMsg])
-    //   }
-    //   )}
-
-
-
-
-    // let chatsWithFriend = this.getChatWithFriend(friendId);
-    // let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
-    
-    // let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
-
-    // if (chatMsg?.senderId === this.loginId){
-    //   chatMsg.content.push(body);
-    // }
-    // else {
-    //   this.chats.push( {senderId: this.loginId, receiverId: friendId, content: [body]});
-    // }
   }
 
-// let chatMsg = this.chats.find(msg => msg === lastMsg);
-  reduceAll(){ this.barChats.map( chat => chat.isOpen = false); }
+  reduceAll(){ 
+    this.barChat$.subscribe(val=>
+      val.map( chat => chat.isOpen = false)); 
+  }
   closeChat(chat: IChatBox){ 
-    const index = this.barChats.indexOf(chat);
-    this.barChats.splice(index, 1);   
+    // const index = this.barChats.indexOf(chat);
+    // this.barChats.splice(index, 1);   
   }
   reduceChat(chat: IChatBox){
-    this.reduceAll();     chat.isOpen = false;
+    this.reduceAll();    
+    this.barChat$.pipe(take(1)).subscribe(val =>
+      {
+        let i = val.indexOf(chat);
+        val[i].isOpen = false;
+        this.barChat$.next(val)
+      }
+    );  
+    // chat.isOpen = false;
   }
   toggleChat(chat: IChatBox){
-    this.reduceAll();     chat.isOpen = !chat.isOpen;
-    return this.barChats;
+    this.reduceAll();     
+    chat.isOpen = !chat.isOpen;
+    // return this.barChats;
   }
 
   openNewChat(friendId: number) {
     let foundCorrespondence = false;
-    this.barChats.map(chat => console.log(friendId))
-    this.barChats.map(
-      chat => {
-        if (chat.friendId === friendId) {
-          foundCorrespondence = true;
-          this.toggleChat(chat)
-        }
+    this.barChat$.pipe(take(1)).subscribe(val =>
+      {
+        val.map( chat => {
+          if (chat.friendId === friendId){
+            chat.isOpen = !chat.isOpen;
+            foundCorrespondence = true;
+            this.barChat$.next(val)
+          }
+        })
+        if (!foundCorrespondence){
+        val.length === 3 ? val.shift() : null;
+        let newChat = {friendId: friendId, isOpen: true}
+        this.barChat$.next([... val, newChat])}
       }
     )
-    if (!foundCorrespondence) {
-      this.barChats.length === 3 ? this.barChats.shift() : null;
-      this.reduceAll();
-      this.barChats.push({ friendId: friendId, isOpen: true });
-    }
-    console.log("barchats ", this.barChats)
-    // return this.barChats
   }
 
   ngOnDestroy(){

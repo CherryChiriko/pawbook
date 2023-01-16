@@ -1,4 +1,8 @@
 <div class="d-flex flex-row  fixed-bottom w-100" id="chatbox-div">
+    <!-- <app-chatbox [chatBox] = "chat" >
+        (closeBox)="closeBoxHandler($event)"
+        (reduceBox)="reduceBoxHandler($event)"
+        </app-chatbox> -->
     <div *ngFor="let chat of barChats">
     <div class="card h-100 text-center">
         <button class="btn" (click)="toggleChat(chat)">

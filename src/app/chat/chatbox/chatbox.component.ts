@@ -32,7 +32,7 @@ export class ChatboxComponent {
     );
     this.chat.getChatsSubject().subscribe(
       val => {
-        this.arr = this.chat.getChatWithFriends(val, this.chatBox.friendId)
+        this.arr = this.chat.getChatWithFriend(val, this.chatBox.friendId)
       }
     );
 

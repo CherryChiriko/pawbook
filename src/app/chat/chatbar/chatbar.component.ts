@@ -13,27 +13,15 @@ export class ChatbarComponent implements OnInit{
 
   constructor(private chats: ChatService, private users : UserService){}
 
-  barChats : IChatBox[] = []
-
-  isOpen : boolean = false;  
-  isOpenSubs ?: Subscription;
-
+  barChats : IChatBox[] = [] 
+  barChatSubs ?: Subscription;
+  // chat : IChatBox = {friendId: 1, isOpen: true}
   link : string|null = ''
 
-  // ngOnInit(): void { 
-  //   this.loginIdSubs = this.users.getLoginId().subscribe(
-  //     val => this.loginId = val
-  //   );
-  //   this.isOpenSubs = this.sidebar.getIsOpen().subscribe(
-  //     val => this.isOpen = val
-  //   )
-  // }
-
-
-  
-
   ngOnInit(): void {
-    this.barChats = this.chats.barChats;
+    this.barChatSubs = this.chats.getBarChatsSubject().subscribe(
+      val => this.barChats = val
+    );
   }
 
   getPicture(id: number){
@@ -41,11 +29,8 @@ export class ChatbarComponent implements OnInit{
   }
 
   toggleChat(chat : IChatBox){
-    this.barChats = this.chats.toggleChat(chat);
-    console.log(this.barChats)
-    return this.barChats
+    this.chats.toggleChat(chat);
   }
-
   closeBoxHandler(chat: IChatBox){
     this.chats.closeChat(chat)
   }
@@ -54,6 +39,6 @@ export class ChatbarComponent implements OnInit{
   }
 
   ngOnDestroy(){
-    this.isOpenSubs?.unsubscribe();
+    this.barChatSubs?.unsubscribe();
   }
 }
