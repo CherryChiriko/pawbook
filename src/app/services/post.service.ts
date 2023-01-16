@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IPost } from '../interfaces/interfaces';
 import postsData from '../data/posts.json'
 import { UserService } from './user.service';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 export class PostService {
 
   constructor( private users : UserService) { 
-    this.users.getLoginId().subscribe(
+    this.loginIdSubs = this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
   }
@@ -24,7 +24,7 @@ export class PostService {
   // getAllPosts(){return this.posts; }
 
   getFriendsPosts(userId: number){
-      let friendIds = this.users.getUserInfo(userId)?.friends;
+      let friendIds = this.users.getUserInfo(userId).friends;
       return this.posts.filter(post => {
         return (
           post.userId === this.loginId || (
@@ -34,6 +34,14 @@ export class PostService {
       )
   }
 
+  // getFriendsPost(id: number) {
+  //   return this.postsSubject.pipe(
+  //     map(posts => {
+  //         console.log(posts)
+  //       //  return /* post filtrati */
+  
+  //     }))
+  // }
   getFriendsPost(arr : IPost[], userId: number){
     let friendIds = this.users.getUserInfo(userId)?.friends;
     return arr.filter(post => {
@@ -48,7 +56,7 @@ export class PostService {
   getPostsSubject(): Observable<IPost[]> { return this.postsSubject}
 
   addPost(body: string){
-    let newPost = {userId: 0, content: body}
+    let newPost = {userId: this.loginId, content: body}
     this.posts.unshift( newPost);
     // // this.postsSubject.next(this.posts);    
     // console.log("posts ", this.posts)

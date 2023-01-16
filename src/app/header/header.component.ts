@@ -21,10 +21,10 @@ export class HeaderComponent implements OnInit {
   link : string|null = ''
 
   ngOnInit(): void { 
-    this.users.getLoginId().subscribe(
+    this.loginIdSubs = this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
-    this.sidebar.getIsOpen().subscribe(
+    this.isOpenSubs = this.sidebar.getIsOpen().subscribe(
       val => this.isOpen = val
     )
 

@@ -2,29 +2,30 @@ import { Injectable, OnInit } from '@angular/core';
 import { IChat, IChatBox } from '../interfaces/interfaces';
 import chatsData from '../data/chats.json'
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService implements OnInit{
+export class ChatService{
 
   chats : IChat[] = chatsData
   barChats : IChatBox[] =  [];
+  
   chatsSubject = new BehaviorSubject(this.chats);
 
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
 
-  constructor() { }
-  ngOnInit(){  
+  constructor(private users: UserService) { 
+    this.loginIdSubs = this.users.getLoginId().subscribe(
+      val => this.loginId = val
+    );
     this.barChats = [];
   }
-  getChatsSubject(): Observable<IChat[]> { return this.chatsSubject}
 
-  // getAllMsgs(friendId : number){
-  //   console.log(this.getChatWithFriend(friendId));
-  //   return this.getChatWithFriend(friendId); 
-  // }
+  getChatsSubject(): Observable<IChat[]> { return this.chatsSubject}
 
   getChatWithFriend(friendId : number){
     return this.chats.filter(chat => {
@@ -43,22 +44,60 @@ export class ChatService implements OnInit{
   }
 
   addMsg(body: string, friendId: number){
-    
-    let chatsWithFriend = this.getChatWithFriend(friendId);
-    let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
-    // let chatMsg = this.chats.find(msg => msg === lastMsg);
-    let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
+    this.chatsSubject.pipe(take(1)).subscribe(val =>
+      {
+        let chatsWithFriend = this.getChatWithFriends(val, friendId);
+        let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
+        let chatMsg = val[val.indexOf(lastMsg)];
 
-    if (chatMsg?.senderId === this.loginId){
-      chatMsg.content.push(body);
-    }
-    else {
-      this.chats.push( {senderId: this.loginId, receiverId: friendId, content: [body]});
-      // console.log(this.chats)
-    }
+        if (chatMsg?.senderId === this.loginId){
+          chatMsg.content.push(body);
+          this.chatsSubject.next(val);
+        }
+        else {
+          const newMsg = {senderId: this.loginId, receiverId: friendId, content: [body]}
+          this.chatsSubject.next([...val, newMsg])
+        }
+      }
+    )
+
+    // let chatsWithFriend = this.getChatWithFriend(friendId);
+    // let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
+    // let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
+
+    // if (chatMsg?.senderId === this.loginId){
+    //   this.chatsSubject.pipe(take(1)).subscribe(val =>
+    //     {
+    //       chatMsg.content.push(body);
+    //       this.chatsSubject.next(this.chats)
+    //     }
+    //     )
+    // }
+    // else {
+    // this.chatsSubject.pipe(take(1)).subscribe(val =>
+    //   {
+    //     const newMsg = {senderId: this.loginId, receiverId: friendId, content: [body]}
+    //     this.chatsSubject.next([...val, newMsg])
+    //   }
+    //   )}
+
+
+
+
+    // let chatsWithFriend = this.getChatWithFriend(friendId);
+    // let lastMsg = chatsWithFriend[chatsWithFriend.length-1];
+    
+    // let chatMsg = this.chats[this.chats.indexOf(lastMsg)];
+
+    // if (chatMsg?.senderId === this.loginId){
+    //   chatMsg.content.push(body);
+    // }
+    // else {
+    //   this.chats.push( {senderId: this.loginId, receiverId: friendId, content: [body]});
+    // }
   }
 
-
+// let chatMsg = this.chats.find(msg => msg === lastMsg);
   reduceAll(){ this.barChats.map( chat => chat.isOpen = false); }
   closeChat(chat: IChatBox){ 
     const index = this.barChats.indexOf(chat);

@@ -24,12 +24,13 @@ export class HomeComponent implements OnInit{
   constructor(private post: PostService, private users: UserService){}
 
   ngOnInit(): void {
-    this.users.getLoginId().subscribe(
+    this.loginIdSubs = this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
 
-    this.post.getPostsSubject().subscribe(
+    this.postSubs = this.post.getPostsSubject().subscribe(
       val => this.arr = this.post.getFriendsPost(val, this.loginId)
+      // val => this.post.getFriendsPost(this.loginId)
     );
   }
   
