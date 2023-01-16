@@ -14,21 +14,14 @@ export class HeaderComponent implements OnInit {
   isOpen : boolean = this.sidebar.isOpen;
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
-  // friendsIds ?: number[] = this.users.getUserInfo(this.loginId).friends;
 
   ngOnInit(): void { 
     this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
-    console.log("header ", this.loginId)
   }
 
-
-  // loginCheck(id?:number){return 0}
-  // loginCheck(){return this.users.loginCheck();}
-
   toggleSidebar(){
-    // console.log("I am header: ", this.isOpen)
     this.isOpen = this.sidebar.toggleSidebar();
     console.log(this.loginId);
   }

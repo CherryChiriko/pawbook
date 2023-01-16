@@ -10,5 +10,5 @@ export class SidebarService {
   ngOnInit(){}
   
   toggleSidebar(){this.isOpen = !this.isOpen; return this.isOpen;}
-  turnOffSidebar(){this.isOpen = false;}
+  turnOffSidebar(){this.isOpen = false; return this.isOpen;}
 }

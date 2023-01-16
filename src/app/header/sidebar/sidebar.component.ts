@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ChatService } from 'src/app/services/chat.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
@@ -13,26 +14,37 @@ export class SidebarComponent implements OnInit {
     private eRef: ElementRef, private chats: ChatService
     ){}
 
-  // isOpen : boolean = false;
+  loginId : number = -1;   
+  loginIdSubs ?: Subscription; 
   searchBody: string = '';
   friendsIds ?: number[];
 
   ngOnInit(): void {
-    // this.isOpen = this.sidebar.isOpen;
-    this.friendsIds = this.users.getUserInfo(0).friends;
+    this.users.getLoginId().subscribe(
+      val => this.loginId = val
+    );
+    this.friendsIds = this.users.getUserInfo(this.loginId).friends;
   }
 
   public text!: String;
+  hostElem = this.eRef.nativeElement;
 
-  // @HostListener('document:click', ['$event'])
-  // clickout(event: any) {
-  //   if(!this.eRef.nativeElement.contains(event.target)) {
-  //     this.turnOff();}
-  // }
+  ngAfterViewInit() {
+    
+    console.log(this.hostElem.children);
+    console.log(this.hostElem.parentNode);
+  }
 
-  // toggleBar(){ this.isOpen = this.sidebar.toggleSidebar();}
-  // toggleBar(){ this.isOpen = false;}
-  turnOff(){ this.sidebar.turnOffSidebar(); console.log("I should be off")}
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    if(!this.eRef.nativeElement.contains(event.target) && !this.hostElem.parentNode.contains(event.target) ) {
+      console.log("clicking outside?")
+      this.turnOff();}
+  }
+
+  turnOff(){ 
+    this.sidebar.turnOffSidebar(); console.log("I should be off")
+  }
   
   getFriendInfo(id: number){  return this.users.getUserInfo(id)}
 
@@ -44,5 +56,9 @@ export class SidebarComponent implements OnInit {
 
   openNewChat(friendId : number){
     this.chats.openNewChat(friendId)
+  }
+
+  ngOnDestroy(){
+    this.loginIdSubs?.unsubscribe();
   }
 }
