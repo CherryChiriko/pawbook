@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SidebarService } from '../services/sidebar.service';
 import { UserService } from '../services/user.service';
 
@@ -12,11 +13,14 @@ export class HeaderComponent implements OnInit {
 
   isOpen : boolean = this.sidebar.isOpen;
   loginId : number = -1;  
+  loginIdSubs ?: Subscription;
   // friendsIds ?: number[] = this.users.getUserInfo(this.loginId).friends;
 
   ngOnInit(): void { 
-    this.loginId = this.users.getLoginId();
-    console.log(this.loginId)
+    this.users.getLoginId().subscribe(
+      val => this.loginId = val
+    );
+    console.log("header ", this.loginId)
   }
 
 
@@ -28,4 +32,9 @@ export class HeaderComponent implements OnInit {
     this.isOpen = this.sidebar.toggleSidebar();
     console.log(this.loginId);
   }
+
+  ngOnDestroy(){
+    this.loginIdSubs?.unsubscribe();
+  }
+  
 }

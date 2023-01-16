@@ -25,3 +25,8 @@ export interface IChat {
     receiverId: number,
     content : string[]
 }
+
+export interface IChatBox {
+    friendId : number,
+    isOpen : boolean
+}

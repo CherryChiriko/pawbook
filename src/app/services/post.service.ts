@@ -15,7 +15,7 @@ export class PostService {
   getAllPosts(){return this.posts; }
 
   getFriendsPosts(userId: number){
-      let friendIds = this.users.getUserFromId(userId)?.friends;
+      let friendIds = this.users.getUserInfo(userId)?.friends;
       return this.posts.filter(post => {
         return (
           post.userId === 0 || (

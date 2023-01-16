@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { IChatBox } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,30 +10,30 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ChatbarComponent implements OnInit{
  
-  @Output() friendId !: number;
+  // @Output() friendId !: number;
 
   constructor(private chats: ChatService, private users : UserService){}
 
-  openChats : number[] = []
-  isOpen : boolean[] = []
+  barChats : IChatBox[] = []
 
   ngOnInit(): void {
-    this.openChats = this.chats.openChats;
-    this.isOpen = [false,false,false];
+    this.barChats = this.chats.barChats;
   }
 
   getPicture(id: number){
     return this.users.getUserInfo(id).profilePic
   }
 
-  toggleChat(index: number){
-    return this.chats.toggleChat(this.isOpen, index)
+  toggleChat(chat : IChatBox){
+    this.barChats = this.chats.toggleChat(chat);
+    console.log(this.barChats)
+    return this.barChats
   }
 
-  closeBoxHandler(friendId: number){
-    this.chats.closeChat(friendId)
+  closeBoxHandler(chat: IChatBox){
+    this.chats.closeChat(chat)
   }
-  reduceBoxHandler(friendId: number){
-    this.isOpen = this.chats.reduceChat(this.isOpen, friendId);
+  reduceBoxHandler(chat: IChatBox){
+    this.chats.reduceChat(chat);
   }
 }

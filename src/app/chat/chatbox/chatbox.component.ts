@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IChat, IUser } from 'src/app/interfaces/interfaces';
+import { IChat, IChatBox, IUser } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,9 +9,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./chatbox.component.css']
 })
 export class ChatboxComponent {
-  @Input() friendId !: number;
-  @Output() closeBox: EventEmitter<number> = new EventEmitter();
-  @Output() reduceBox: EventEmitter<number> = new EventEmitter();
+  @Input() chatBox !: IChatBox;
+  @Output() closeBox: EventEmitter<IChatBox> = new EventEmitter();
+  @Output() reduceBox: EventEmitter<IChatBox> = new EventEmitter();
 
   friend !: IUser;
   msgContent: string = '';
@@ -20,8 +20,8 @@ export class ChatboxComponent {
   constructor(private chat: ChatService, private users: UserService){}
 
   ngOnInit(): void { 
-    this.friend = this.users.getUserInfo(this.friendId);
-    this.arr = this.chat.getChatWithFriend(this.friendId);
+    this.friend = this.users.getUserInfo(this.chatBox.friendId);
+    this.arr = this.chat.getChatWithFriend(this.friend.id);
   }
   getPicture(id: number){
     return this.users.getUserInfo(id).profilePic
@@ -29,9 +29,11 @@ export class ChatboxComponent {
   addMsgContent(event: any){
     this.msgContent = event.target.value;
   }
-  add(){ this.chat.addMsg(this.msgContent, this.friendId)}
+  add(){ 
+    this.chat.addMsg(this.msgContent, this.friend.id)
+  }
 
-  close(id: number){ this.closeBox.emit(id) }
-  reduce(id: number){ this.reduceBox.emit(id) }
+  close(chat: IChatBox){ this.closeBox.emit(chat) }
+  reduce(chat: IChatBox){ this.reduceBox.emit(chat) }
   
 }
