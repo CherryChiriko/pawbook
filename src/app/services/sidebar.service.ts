@@ -13,7 +13,6 @@ export class SidebarService {
   getIsOpen(): Observable<boolean> { return this.isOpen}
 
   toggleSidebar(){
-    console.log("I'm executing")
     this.isOpen.next(!this.isOpen);}
   turnOffSidebar(){
     this.isOpen.next(false);}

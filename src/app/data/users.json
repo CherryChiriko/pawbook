@@ -3,13 +3,13 @@
     "email":"pixie@gmail.com", "country": "Thailand", "city": "Chiang Mai (เชียงใหม่)", 
     "password": "Ih8U",
     "profilePic": "../assets/images/pixie.jpg",
-    "friends": [1,3,4,5,6]},
+    "friends": [1,3,4,5,6,7]},
 
     { "id": 1, "name": "Mr. Hopkins", "species": "frog", 
-    "email":"hop@gmail.com", "country": "Brazil", "city": "São Paulo", 
+    "email":"hop@gmail.com", "country": "Croatia", "city": "Split", 
     "password": "ComeBackSoon39",
     "profilePic": "../assets/images/hopkins.jpg",
-    "friends": [2,3,4,5]},
+    "friends": [2,3,4,5,7]},
 
     { "id": 2, "name": "Freddy", "species": "penguin", 
     "email":"pen@gmail.com", "country": "Argentina", "city": "Rio Grande", 
@@ -27,7 +27,7 @@
     "email":"FEDuX22@gmail.com", "country": "Italy", "city": "Urbino", 
     "password": "MorsTuaVitaMea",
     "profilePic": "../assets/images/federico.jpg",
-    "friends": [1,5]},
+    "friends": [1,5,7]},
 
     { "id": 5, "name": "Harvey", "species": "rabbit", 
     "email":"harvey_edna@gmail.com", "country": "Germany", "city": "Berlin", 
@@ -39,5 +39,11 @@
     "email":"jessyXoXo@gmail.com", "country": "Australia", "city": "Sidney", 
     "password": "beauty_full.100",
     "profilePic": "../assets/images/jessica.jpg",
-    "friends": [0,1,2,3,4,5]}
+    "friends": [0,1,2,3,4,5]},
+
+    { "id": 7, "name": "Caramelo", "species": "doguinho caramelo", 
+    "email":"CachorroCarame6@gmail.com", "country": "Brazil", "city": "São Paulo", 
+    "password": "Woof?",
+    "profilePic": "../assets/images/caramelo.jpg",
+    "friends": [1,3,4,6]}
   ]

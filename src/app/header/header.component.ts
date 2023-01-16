@@ -14,8 +14,11 @@ export class HeaderComponent implements OnInit {
   // isOpen : boolean = this.sidebar.isOpen;
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
+
   isOpen : boolean = false;  
   isOpenSubs ?: Subscription;
+
+  link : string|null = ''
 
   ngOnInit(): void { 
     this.users.getLoginId().subscribe(
@@ -24,6 +27,9 @@ export class HeaderComponent implements OnInit {
     this.sidebar.getIsOpen().subscribe(
       val => this.isOpen = val
     )
+
+    // this.link = this.loginId > -1 ? '/home' : null;
+    // console.log("Link ", this.link)
   }
 
   toggleSidebar(){
@@ -38,9 +44,9 @@ export class HeaderComponent implements OnInit {
     // this.sidebar.updateData(this.isOpen);
     // console.log("Sidebar status: ", this.isOpen);
 
-    console.log("I start as: ", this.isOpen);
+    // console.log("I start as: ", this.isOpen);
     this.isOpen = !this.isOpen;
-    console.log("Now I should be different: ", this.isOpen)
+    // console.log("Now I should be different: ", this.isOpen)
   }
 
   ngOnDestroy(){

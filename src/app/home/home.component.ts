@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IPost } from '../interfaces/interfaces';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
@@ -14,12 +15,34 @@ export class HomeComponent implements OnInit{
   animals : UserService = this.users;
   postContent: string = '';
 
+  loginId : number = -1;  
+  loginIdSubs ?: Subscription;
+
+  postSubject !: IPost[];  
+  postSubs ?: Subscription;
+
   constructor(private post: PostService, private users: UserService){}
 
   ngOnInit(): void {
-    this.arr = this.post.getFriendsPosts(0);
+    this.users.getLoginId().subscribe(
+      val => this.loginId = val
+    );
+
+    this.arr = this.post.getFriendsPosts(this.loginId);
+
+    this.post.getPostsSubject().subscribe(
+      val => this.arr = val
+    );
   }
   
   addPostContent(event: any){    this.postContent = event.target.value;  }
-  add(){ this.post.addPost(this.postContent); console.log(this.post.getFriendsPosts(0))}
+  add(){ 
+    this.post.addPost(this.postContent); 
+    console.log(this.post.getFriendsPosts(0))
+  }
+
+  ngOnDestroy(){
+    this.loginIdSubs?.unsubscribe();
+    this.postSubs?.unsubscribe();
+  }
 }
