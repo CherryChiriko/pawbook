@@ -28,10 +28,11 @@ export class HomeComponent implements OnInit{
       val => this.loginId = val
     );
 
+    // this.postSubs = this.post.getPostsSubject().subscribe()
     this.postSubs = this.post.getPostsSubject().subscribe(
-      // val => this.arr = this.post.getFriendsPost(this.loginId)
+    //   // val => this.arr = this.post.getFriendsPost(this.loginId)
       val => this.arr = this.post.getFriendsPost(val, this.loginId)
-      // val => this.post.getFriendsPost(this.loginId)
+    //   // val => this.post.getFriendsPost(this.loginId)
     );
   }
   

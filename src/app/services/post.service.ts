@@ -40,7 +40,14 @@ export class PostService {
     )
   }
 
-  getPostsSubject(): Observable<IPost[]> { return this.postsSubject}
+  getPostsSubject(): Observable<IPost[]> { 
+  //   let arr : IPost[]; 
+  //   this.postsSubject.subscribe( val => arr = val)
+  //   return this.postsSubject.pipe(
+  //   v => this.getFriendsPost(arr ,userId)
+  // )
+  return this.postsSubject;
+  }
 
   addPost(body: string){
     let newPost = {userId: this.loginId, content: body}

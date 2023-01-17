@@ -62,6 +62,13 @@ export class SidebarComponent implements OnInit {
   }
   searchContent(event: any){    this.searchBody = event.target.value;  }
 
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if(event.key == 'Enter'){
+      this.search()
+    }
+  }
+
   openNewChat(friendId : number){
     this.chats.openNewChat(friendId)
   }

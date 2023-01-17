@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IChat, IChatBox, IUser } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
@@ -24,6 +24,7 @@ export class ChatboxComponent {
   chatSubj !: IChat[];  
   chatSubjSubs ?: Subscription;
 
+  @ViewChild('input') inputText!: { nativeElement: { value: string; }; };
   constructor(private chat: ChatService, private users: UserService){}
 
   ngOnInit(): void { 
@@ -46,7 +47,18 @@ export class ChatboxComponent {
     this.msgContent = event.target.value;
   }
   add(){ 
-    this.chat.addMsg(this.msgContent, this.friend.id)
+    if (this.msgContent !== ''){
+      this.chat.addMsg(this.msgContent, this.friend.id)
+    }
+    // console.log(this.inputText.nativeElement.value)
+    this.inputText.nativeElement.value = ' ';
+  }
+  
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if(event.key == 'Enter'){
+      this.add()
+    }
   }
 
   close(chat: IChatBox){ this.closeBox.emit(chat) }
