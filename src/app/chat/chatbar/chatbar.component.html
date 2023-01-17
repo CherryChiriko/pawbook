@@ -1,11 +1,10 @@
 <div class="d-flex flex-row  fixed-bottom w-100" id="chatbox-div">
     <div *ngFor="let chat of barChats">
-        <p style="color: red">{{chat.friendId}} {{chat.isOpen}}</p>
     <div class="card h-100 text-center">
         <button class="btn" (click)="toggleChat(chat)">
             <img src="{{getPicture(chat.friendId)}}">
             <i class="material-symbols-outlined">chat_bubble</i>
-                <!-- <i class="material-symbols-outlined">close</i> -->
+            <!-- <i class="material-symbols-outlined">close</i> -->
         </button>
     </div>
     <app-chatbox [chatBox] = "chat" 

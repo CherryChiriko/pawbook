@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
   loginId : number = -1;  
   loginIdSubs ?: Subscription;
 
-  postSubject !: IPost[];  
+  post$ !: IPost[];  
   postSubs ?: Subscription;
 
   constructor(private post: PostService, private users: UserService){}
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit{
     );
 
     this.postSubs = this.post.getPostsSubject().subscribe(
+      // val => this.arr = this.post.getFriendsPost(this.loginId)
       val => this.arr = this.post.getFriendsPost(val, this.loginId)
       // val => this.post.getFriendsPost(this.loginId)
     );
