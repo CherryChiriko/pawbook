@@ -52,29 +52,45 @@ export class ChatService{
     )
   }
 
-  reduceAll(){ 
-    this.barChat$.subscribe(val=>
-      val.map( chat => chat.isOpen = false)); 
-  }
   closeChat(chat: IChatBox){ 
-    // const index = this.barChats.indexOf(chat);
-    // this.barChats.splice(index, 1);   
-  }
-  reduceChat(chat: IChatBox){
-    this.reduceAll();    
-    this.barChat$.pipe(take(1)).subscribe(val =>
+    this.barChat$.pipe(take(1)).subscribe(val=>
       {
         let i = val.indexOf(chat);
-        val[i].isOpen = false;
-        this.barChat$.next(val)
+        val.splice(i, 1);
+        console.log("val ", val)
+        this.barChat$.next(val);
+      })  
+  }
+  reduceChat(chat: IChatBox){
+    // this.reduceAll();    
+    // this.barChat$.pipe(take(1)).subscribe(val =>
+    //   {
+    //     let i = val.indexOf(chat);
+    //     val[i].isOpen = false;
+    //     this.barChat$.next(val)
+    //   }
+    // );  
+    this.barChat$.pipe(take(1)).subscribe(
+      val => {
+        let i = val.indexOf(chat);
+        console.log(val)
+        // val[i].isOpen = false;
+        this.barChat$.next(val);
       }
-    );  
+    )
     // chat.isOpen = false;
   }
   toggleChat(chat: IChatBox){
-    this.reduceAll();     
-    chat.isOpen = !chat.isOpen;
+    // this.reduceAll();     
+    // chat.isOpen = !chat.isOpen;
     // return this.barChats;
+    this.barChat$.pipe(take(1)).subscribe(
+      val => {
+        let i = val.indexOf(chat);
+        val[i].isOpen = !val[i].isOpen;
+        this.barChat$.next(val);
+      }
+    )
   }
 
   openNewChat(friendId: number) {
@@ -82,15 +98,16 @@ export class ChatService{
     this.barChat$.pipe(take(1)).subscribe(val =>
       {
         val.map( chat => {
+          chat.isOpen = false;
           if (chat.friendId === friendId){
-            chat.isOpen = !chat.isOpen;
             foundCorrespondence = true;
+            chat.isOpen = !chat.isOpen;
             this.barChat$.next(val)
           }
         })
         if (!foundCorrespondence){
         val.length === 3 ? val.shift() : null;
-        let newChat = {friendId: friendId, isOpen: true}
+        let newChat = {friendId: friendId, isOpen: true};
         this.barChat$.next([... val, newChat])}
       }
     )

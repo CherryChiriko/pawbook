@@ -43,7 +43,7 @@ export class PostService {
   //     }))
   // }
   getFriendsPost(arr : IPost[], userId: number){
-    let friendIds = this.users.getUserInfo(userId)?.friends;
+    let friendIds = this.users.getUserInfo(userId).friends;
     return arr.filter(post => {
       return (
         post.userId === this.loginId || (

@@ -15,7 +15,6 @@ export class ChatbarComponent implements OnInit{
 
   barChats : IChatBox[] = [] 
   barChatSubs ?: Subscription;
-  // chat : IChatBox = {friendId: 1, isOpen: true}
   link : string|null = ''
 
   ngOnInit(): void {
@@ -32,7 +31,7 @@ export class ChatbarComponent implements OnInit{
     this.chats.toggleChat(chat);
   }
   closeBoxHandler(chat: IChatBox){
-    this.chats.closeChat(chat)
+    this.chats.closeChat(chat);
   }
   reduceBoxHandler(chat: IChatBox){
     this.chats.reduceChat(chat);

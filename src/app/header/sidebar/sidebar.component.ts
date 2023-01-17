@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { IChatBox } from 'src/app/interfaces/interfaces';
 import { ChatService } from 'src/app/services/chat.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
@@ -16,21 +17,28 @@ export class SidebarComponent implements OnInit {
 
   loginId : number = -1;   
   loginIdSubs ?: Subscription; 
+
+  barChat : IChatBox[] = [];   
+  barChat$ ?: Subscription; 
+
   searchBody: string = '';
   friendsIds ?: number[];
 
   ngOnInit(): void {
-    this.users.getLoginId().subscribe(
+    this.loginIdSubs = this.users.getLoginId().subscribe(
       val => this.loginId = val
     );
     this.friendsIds = this.users.getUserInfo(this.loginId).friends;
+
+    this.barChat$ = this.chats.getBarChatsSubject().subscribe(
+      val => this.barChat = val
+    );
   }
 
   public text!: String;
   hostElem = this.eRef.nativeElement;
 
   // ngAfterViewInit() {
-    
   //   console.log(this.hostElem.children);
   //   console.log(this.hostElem.parentNode);
   // }
@@ -39,7 +47,6 @@ export class SidebarComponent implements OnInit {
   clickout(event: any) {
     if(!this.eRef.nativeElement.contains(event.target) && 
     !this.hostElem.parentNode.contains(event.target) ) {
-      // console.log("clicking outside?")
       this.turnOff();}
   }
 
@@ -61,5 +68,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnDestroy(){
     this.loginIdSubs?.unsubscribe();
+    this.barChat$?.unsubscribe();
   }
 }
