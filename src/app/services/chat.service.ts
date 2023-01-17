@@ -62,32 +62,25 @@ export class ChatService{
       })  
   }
   reduceChat(chat: IChatBox){
-    // this.reduceAll();    
-    // this.barChat$.pipe(take(1)).subscribe(val =>
-    //   {
-    //     let i = val.indexOf(chat);
-    //     val[i].isOpen = false;
-    //     this.barChat$.next(val)
-    //   }
-    // );  
     this.barChat$.pipe(take(1)).subscribe(
       val => {
         let i = val.indexOf(chat);
-        console.log(val)
-        // val[i].isOpen = false;
+        val[i].isOpen = false;
         this.barChat$.next(val);
       }
     )
-    // chat.isOpen = false;
   }
   toggleChat(chat: IChatBox){
-    // this.reduceAll();     
-    // chat.isOpen = !chat.isOpen;
-    // return this.barChats;
+
     this.barChat$.pipe(take(1)).subscribe(
       val => {
         let i = val.indexOf(chat);
-        val[i].isOpen = !val[i].isOpen;
+        if (val[i].isOpen === false){
+          val.map(chat => chat.isOpen = false)
+          val[i].isOpen = true; 
+          this.barChat$.next(val);
+        }
+        else { val[i].isOpen = false; }
         this.barChat$.next(val);
       }
     )
@@ -117,44 +110,3 @@ export class ChatService{
     this.loginIdSubs?.unsubscribe();
   }
 }
-
-
-  // toggleChat(arr : boolean[], index: number){
-  //   arr.map( (_, i) =>
-  //   i !== index ? arr[i]=false : arr[i] = !arr[i])
-  //   return arr[index]
-  // }
-
-  // openNewChat(friendId : number){
-    // let foundCorrespondence = false;
-    // barChats.map(
-    //     chat => 
-    //    { 
-    //        if (chat.friend === friendId) { 
-    //        foundCorrespondence = true; 
-    //        barChats.map( chat => chat.isOpen = false);
-    //        chat.isOpen = true}
-    //    }
-    // )
-    // if (!foundCorrespondence) { 
-    //     barChats.length === 3 ? barChats.shift() : null;
-    //     barChats.map( chat => chat.isOpen = false);
-    //     barChats.push({friend: friendId, isOpen: true});
-    // }
-
-
-    // if (this.barChats.indexOf(friendId)<= -1){
-    // this.barChats.length === 3 ? this.barChats.shift() : null;
-    // this.barChats.push(friendId);}
-  // }
-
-  // closeChat(friendId: number){
-    // const index = this.barChats.indexOf(friendId);
-    // this.barChats.splice(index, 1);
-  // }
-  // reduceChat(arr : boolean[], friendId: number){
-    // let index = this.barChats.indexOf(friendId);
-    // // this.toggleChat(arr, index)
-    // arr[index] = false;
-    // return arr;
-  // }
