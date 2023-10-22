@@ -50,7 +50,6 @@ export class ChatboxComponent {
     if (this.msgContent !== ''){
       this.chat.addMsg(this.msgContent, this.friend.id)
     }
-    // console.log(this.inputText.nativeElement.value)
     this.inputText.nativeElement.value = ' ';
   }
   
